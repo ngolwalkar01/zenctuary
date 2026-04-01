@@ -1,0 +1,341 @@
+/* ==========================================
+   LAYOUT COMPONENTS
+   ========================================== */
+
+.zen-container {
+  width: 100%;
+  max-width: var(--zen-container);
+  margin-inline: auto;
+}
+
+.zen-page-padding {
+  padding-left: var(--zen-page-pad-x);
+  padding-right: var(--zen-page-pad-x);
+}
+
+.zen-section {
+  padding-top: var(--zen-space-180);
+  padding-bottom: var(--zen-space-180);
+}
+
+.zen-section--compact {
+  padding-top: var(--zen-space-120);
+  padding-bottom: var(--zen-space-120);
+}
+
+.zen-section-title {
+  margin-bottom: var(--zen-space-24);
+}
+
+.zen-section-intro {
+  max-width: 720px;
+}
+
+.zen-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--zen-space-32);
+  align-items: center;
+}
+
+.zen-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--zen-space-32);
+}
+
+.zen-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--zen-space-32);
+}
+
+/* ==========================================
+   HEADER / FOOTER
+   ========================================== */
+
+.zen-site-header {
+  min-height: var(--zen-header-height);
+  position: relative;
+  z-index: 20;
+}
+
+.zen-site-footer {
+  padding-top: var(--zen-space-64);
+  padding-bottom: var(--zen-space-32);
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.zen-btn,
+.wp-element-button,
+.wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--zen-space-8);
+  min-height: var(--zen-btn-height-lg);
+  padding: 16px 32px;
+  border-radius: var(--zen-radius-btn);
+  border: var(--zen-border-width) solid transparent;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.zen-btn--primary {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-btn--primary:hover {
+  background: transparent;
+  color: var(--zen-color-gold);
+}
+
+.zen-btn--outline-gold {
+  background: transparent;
+  color: var(--zen-color-gold);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-btn--outline-gold:hover {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+}
+
+.zen-btn--outline-neutral {
+  background: transparent;
+  color: var(--zen-color-text);
+  border-color: var(--zen-color-border);
+}
+
+.zen-btn--outline-neutral:hover {
+  border-color: var(--zen-color-gold);
+  color: var(--zen-color-gold);
+}
+
+.zen-btn--small {
+  min-height: var(--zen-btn-height-sm);
+  padding: 8px 24px;
+}
+
+/* ==========================================
+   CARDS
+   ========================================== */
+
+.zen-card {
+  background: var(--zen-color-bg);
+  border: var(--zen-border-width) solid var(--zen-color-border);
+  border-radius: var(--zen-radius-card);
+  padding: 32px;
+  overflow: hidden;
+}
+
+.zen-card--alt {
+  background: var(--zen-color-bg-alt);
+}
+
+.zen-card--gold {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-card--beige {
+  background: var(--zen-color-text);
+  color: var(--zen-color-bg);
+}
+
+.zen-card__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zen-space-24);
+}
+
+/* ==========================================
+   HERO
+   ========================================== */
+
+.zen-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+
+.zen-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.zen-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zen-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.35);
+}
+
+.zen-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================
+   SPLIT SECTION
+   ========================================== */
+
+.zen-split-media img {
+  width: 100%;
+  border-radius: var(--zen-radius-card);
+  display: block;
+}
+
+/* ==========================================
+   FORMS
+   ========================================== */
+
+.zen-input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  min-height: var(--zen-input-height);
+  padding: 16px;
+  border-radius: var(--zen-radius-input);
+  border: var(--zen-border-width) solid var(--zen-color-border);
+  background: var(--zen-color-bg);
+  color: var(--zen-color-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.zen-input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--zen-color-gold);
+}
+
+.zen-field-error,
+input.is-error,
+textarea.is-error,
+select.is-error {
+  border-color: var(--zen-color-error);
+}
+
+.zen-checkbox,
+input[type="checkbox"] {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: var(--zen-border-width) solid var(--zen-color-border);
+}
+
+/* ==========================================
+   FAQ
+   ========================================== */
+
+.zen-faq__item {
+  border: var(--zen-border-width) solid var(--zen-color-border);
+  border-radius: var(--zen-radius-card);
+  overflow: hidden;
+}
+
+.zen-faq__question {
+  width: 100%;
+  background: transparent;
+  color: var(--zen-color-text);
+  text-align: left;
+  padding: 24px 32px;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: inherit;
+  cursor: pointer;
+}
+
+.zen-faq__answer {
+  padding: 0 32px 24px;
+  display: none;
+}
+
+.zen-faq__item.is-open .zen-faq__answer {
+  display: block;
+}
+
+/* ==========================================
+   POPUP SHELL
+   ========================================== */
+
+.zen-popup {
+  border-radius: var(--zen-radius-popup-desktop);
+  overflow: hidden;
+}
+
+.zen-popup-backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .zen-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zen-grid-3,
+  .zen-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .zen-page-padding {
+    padding-left: var(--zen-page-pad-x-mobile);
+    padding-right: var(--zen-page-pad-x-mobile);
+  }
+
+  .zen-section,
+  .zen-section--compact {
+    padding-top: var(--zen-space-120);
+    padding-bottom: var(--zen-space-120);
+  }
+
+  .zen-card {
+    border-radius: var(--zen-radius-card-mobile);
+    padding: 16px;
+  }
+
+  .zen-btn,
+  .wp-element-button,
+  .wp-block-button__link {
+    min-height: var(--zen-btn-height-lg);
+  }
+
+  .zen-popup {
+    border-radius: var(--zen-radius-popup-mobile);
+  }
+}
