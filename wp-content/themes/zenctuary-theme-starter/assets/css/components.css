@@ -60,6 +60,14 @@
   z-index: 20;
 }
 
+.zen-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent !important;
+}
+
 .zen-site-footer {
   padding-top: var(--zen-space-64);
   padding-bottom: var(--zen-space-32);
