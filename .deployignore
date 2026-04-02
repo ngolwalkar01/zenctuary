@@ -1,16 +1,16 @@
-# But allow this custom theme to deploy
-wp-content/themes/zenctuary-theme-starter/
-wp-content/themes/zenctuary-theme-starter/**
-
-# Future custom plugins:
-# Uncomment one line per plugin when you're ready to deploy it
-# !wp-content/plugins/your-custom-plugin/
-# !wp-content/plugins/your-custom-plugin/**
-
-# Optional: keep repo/dev-only files out of deployments
-.github/
-node_modules/
-**/*.log
-**/.DS_Store
-README.md
-LICENSE
+# Ignore everything by default
+/*
+# Allow wp-content
+!/wp-content/
+# Ignore plugins completely (preserve them on server)
+/wp-content/plugins/
+/wp-content/plugins/**
+# Ignore uploads (optional but recommended)
+/wp-content/uploads/
+/wp-content/uploads/**
+# Ignore all themes
+/wp-content/themes/
+/wp-content/themes/**
+# Allow ONLY your custom theme
+!/wp-content/themes/zenctuary-theme-starter/
+!/wp-content/themes/zenctuary-theme-starter/**
