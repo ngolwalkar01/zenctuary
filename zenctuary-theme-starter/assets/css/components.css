@@ -69,11 +69,11 @@
 }
 
 /* Hide WooCommerce auto-injected Header Icons */
-.wc-block-mini-cart, 
-.site-header-cart, 
+.wc-block-mini-cart,
+.site-header-cart,
 .wp-block-woocommerce-mini-cart,
 .wp-block-woocommerce-customer-account {
-    display: none !important;
+  display: none !important;
 }
 
 
@@ -85,8 +85,8 @@
 /* ==========================================
    WPML NATIVE DROPDOWN OVERRIDES
    ========================================== */
-.wpml-ls-legacy-dropdown a, 
-.wpml-ls-legacy-dropdown a:hover, 
+.wpml-ls-legacy-dropdown a,
+.wpml-ls-legacy-dropdown a:hover,
 .wpml-ls-legacy-dropdown a:focus {
   background-color: transparent !important;
   border: none !important;
@@ -98,7 +98,7 @@
   background-color: var(--zen-color-bg) !important;
   border-radius: var(--zen-radius-card-mobile, 8px) !important;
   padding: 8px !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
 .wpml-ls-legacy-dropdown {
@@ -107,9 +107,10 @@
 
 /* Hide WPML arrow and native text if present */
 .wpml-ls-legacy-dropdown .wpml-ls-item-toggle:after {
-  display: none !important; 
+  display: none !important;
 }
-.wpml-ls-legacy-dropdown .wpml-ls-native, 
+
+.wpml-ls-legacy-dropdown .wpml-ls-native,
 .wpml-ls-legacy-dropdown .wpml-ls-display {
   display: none !important;
 }
@@ -172,7 +173,7 @@
 
 .zen-btn--small {
   min-height: var(--zen-btn-height-sm);
-  padding: 8px 24px;
+  padding: 8px;
 }
 
 /* ==========================================
@@ -347,7 +348,7 @@ input[type="checkbox"] {
    ========================================== */
 
 .zen-overlap-right {
-  width: 135%;
+  min-width: 200%;
   max-width: none !important;
   margin-right: -35%;
   position: relative;
@@ -370,6 +371,12 @@ input[type="checkbox"] {
   font-weight: 600 !important;
 }
 
+/* Force pill gap to exactly 5px, overriding WP's native flex gap */
+:root :where(.zen-faq-section .is-layout-flex),
+.zen-faq-section .wp-block-buttons {
+  gap: 5px !important;
+}
+
 .zen-faq-accordion {
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 32px !important;
@@ -381,7 +388,8 @@ input[type="checkbox"] {
 }
 
 .zen-faq-accordion summary {
-  list-style: none !important; /* Hide native triangle */
+  list-style: none !important;
+  /* Hide native triangle */
   padding: 24px 32px !important;
   font-family: var(--wp--preset--font-family--dm-sans) !important;
   font-size: 16px !important;
@@ -407,11 +415,12 @@ input[type="checkbox"] {
 }
 
 .zen-faq-accordion[open] summary::after {
-  content: "−"; /* Native minus sign */
+  content: "−";
+  /* Native minus sign */
 }
 
 /* Internal Answer formatting */
-.zen-faq-accordion > *:not(summary) {
+.zen-faq-accordion>*:not(summary) {
   padding: 0 32px 24px 32px !important;
   margin: 0 !important;
   font-size: 16px !important;
