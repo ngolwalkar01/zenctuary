@@ -289,7 +289,8 @@
         "typography": {
           "fontFamily": "var(--wp--preset--font-family--dm-sans)",
           "fontSize": "16px",
-          "fontWeight": "700"
+          "fontWeight": "700",
+          "textTransform": "uppercase"
         }
       },
       "core/heading": {
