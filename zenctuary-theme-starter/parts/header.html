@@ -1,19 +1,23 @@
-<!-- wp:group {"tagName":"header","className":"zen-site-header zen-page-padding zen-header-overlay","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+<!-- wp:group {"tagName":"header","className":"zen-site-header zen-page-padding zen-header-overlay","layout":{"type":"constrained"}} -->
 <header class="wp-block-group zen-site-header zen-page-padding zen-header-overlay">
-  <!-- wp:site-logo {"width":180} /-->
-  <!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"center","orientation":"horizontal"}} /-->
-  <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
-  <div class="wp-block-group">
-    <!-- wp:shortcode -->
-    [wpml_language_selector_widget]
-    <!-- /wp:shortcode -->
-    <!-- wp:buttons -->
-    <div class="wp-block-buttons">
-      <!-- wp:button {"className":"zen-btn zen-btn--outline-neutral zen-btn--small"} -->
-      <div class="wp-block-button zen-btn zen-btn--outline-neutral zen-btn--small"><a class="wp-block-button__link wp-element-button" href="/my-account">Sign-In</a></div>
-      <!-- /wp:button -->
+  <!-- wp:group {"className":"zen-container","layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"space-between"}} -->
+  <div class="wp-block-group zen-container">
+    <!-- wp:site-logo {"width":180} /-->
+    <!-- wp:navigation {"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"center","orientation":"horizontal"}} /-->
+    <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
+    <div class="wp-block-group">
+      <!-- wp:shortcode -->
+      [wpml_language_selector_widget]
+      <!-- /wp:shortcode -->
+      <!-- wp:buttons -->
+      <div class="wp-block-buttons">
+        <!-- wp:button {"className":"zen-btn zen-btn--outline-neutral zen-btn--small"} -->
+        <div class="wp-block-button zen-btn zen-btn--outline-neutral zen-btn--small"><a class="wp-block-button__link wp-element-button" href="/my-account">Sign-In</a></div>
+        <!-- /wp:button -->
+      </div>
+      <!-- /wp:buttons -->
     </div>
-    <!-- /wp:buttons -->
+    <!-- /wp:group -->
   </div>
   <!-- /wp:group -->
 </header>
