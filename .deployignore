@@ -1,3 +1,12 @@
+# But allow this custom theme to deploy
+wp-content/themes/zenctuary-theme-starter/
+wp-content/themes/zenctuary-theme-starter/**
+
+# Future custom plugins:
+# Uncomment one line per plugin when you're ready to deploy it
+# !wp-content/plugins/your-custom-plugin/
+# !wp-content/plugins/your-custom-plugin/**
+
 # Optional: keep repo/dev-only files out of deployments
 .github/
 node_modules/
