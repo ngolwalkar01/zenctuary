@@ -182,8 +182,6 @@
           "text": true
         },
         "typography": {
-          "fontSize": true,
-          "fontFamily": true,
           "fontWeight": true
         }
       },
@@ -203,8 +201,6 @@
       },
       "core/heading": {
         "typography": {
-          "fontFamily": true,
-          "fontSize": true,
           "fontWeight": true,
           "lineHeight": true
         },
@@ -214,8 +210,6 @@
       },
       "core/paragraph": {
         "typography": {
-          "fontFamily": true,
-          "fontSize": true,
           "fontWeight": true,
           "lineHeight": true
         },
