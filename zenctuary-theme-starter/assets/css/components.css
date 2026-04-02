@@ -343,36 +343,56 @@ input[type="checkbox"] {
 }
 
 /* ==========================================
-   FAQ
+   FAQ NATIVE ACCORDION (core/details)
    ========================================== */
 
-.zen-faq__item {
-  border: var(--zen-border-width) solid var(--zen-color-border);
-  border-radius: var(--zen-radius-card);
-  overflow: hidden;
-}
-
-.zen-faq__question {
-  width: 100%;
+.zen-faq-accordion {
+  border: 1px solid var(--zen-color-border);
+  border-radius: 32px;
   background: transparent;
+  margin-bottom: var(--zen-space-16);
   color: var(--zen-color-text);
-  text-align: left;
-  padding: 24px 32px;
-  border: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font: inherit;
-  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.zen-faq__answer {
-  padding: 0 32px 24px;
+.zen-faq-accordion summary {
+  list-style: none; /* Hide native triangle */
+  padding: 16px 24px;
+  font-family: var(--wp--preset--font-family--dm-sans);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zen-faq-accordion summary::-webkit-details-marker {
   display: none;
 }
 
-.zen-faq__item.is-open .zen-faq__answer {
-  display: block;
+/* Custom Plus Icon using pseudo-element */
+.zen-faq-accordion summary::after {
+  content: "+";
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--zen-color-text);
+  margin-left: 16px;
+}
+
+.zen-faq-accordion[open] summary::after {
+  content: "−"; /* Native minus sign */
+}
+
+/* Internal Answer formatting */
+.zen-faq-accordion > *:not(summary) {
+  padding: 0 24px 24px 24px;
+  margin: 0;
+  font-size: 16px;
+  font-family: var(--wp--preset--font-family--dm-sans);
+  color: var(--zen-color-text);
 }
 
 /* ==========================================
