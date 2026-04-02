@@ -371,6 +371,13 @@ input[type="checkbox"] {
   font-weight: 600 !important;
 }
 
+/* Inactive FAQ category tabs precise styling */
+.zen-faq-section .zen-btn--outline-neutral .wp-block-button__link {
+  background: var(--wp--preset--color--primary-grey) !important;
+  border-color: var(--wp--preset--color--secondary-grey-light) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
+}
+
 /* Force pill gap to exactly 5px, overriding WP's native flex gap */
 :root :where(.zen-faq-section .is-layout-flex),
 .zen-faq-section .wp-block-buttons {
@@ -378,11 +385,11 @@ input[type="checkbox"] {
 }
 
 .zen-faq-accordion {
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid var(--wp--preset--color--secondary-grey-light) !important;
   border-radius: 32px !important;
-  background: var(--wp--preset--color--secondary-grey-dark, #545454) !important;
+  background: var(--wp--preset--color--primary-grey) !important;
   margin-bottom: var(--zen-space-16) !important;
-  color: var(--zen-color-text) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
   overflow: hidden !important;
   transition: all 0.3s ease !important;
 }
@@ -410,7 +417,7 @@ input[type="checkbox"] {
   font-size: 32px;
   font-weight: 300;
   line-height: 1;
-  color: var(--zen-color-text);
+  color: var(--wp--preset--color--primary-beige);
   margin-left: 16px;
 }
 
@@ -425,7 +432,7 @@ input[type="checkbox"] {
   margin: 0 !important;
   font-size: 16px !important;
   font-family: var(--wp--preset--font-family--dm-sans) !important;
-  color: var(--zen-color-text) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
 }
 
 /* ==========================================
