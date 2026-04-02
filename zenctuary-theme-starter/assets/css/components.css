@@ -367,8 +367,19 @@ input[type="checkbox"] {
   font-size: 13px !important;
   padding: 6px 20px !important;
   min-height: auto !important;
-  border-radius: 24px !important;
+  border-radius: 24px !important; /* Forces the pill shape! */
   font-weight: 600 !important;
+}
+
+/* Fix active Primary Tab square-block disturbance */
+.zen-faq-section .wp-block-button.zen-btn--primary {
+  background: transparent !important;
+  border: none !important;
+}
+.zen-faq-section .wp-block-button.zen-btn--primary .wp-block-button__link {
+  background: var(--wp--preset--color--primary-gold) !important;
+  border-color: var(--wp--preset--color--primary-gold) !important;
+  color: var(--wp--preset--color--primary-grey) !important;
 }
 
 /* Inactive FAQ category tabs precise styling */
@@ -376,6 +387,11 @@ input[type="checkbox"] {
   background: var(--wp--preset--color--primary-grey) !important;
   border-color: var(--wp--preset--color--secondary-grey-light) !important;
   color: var(--wp--preset--color--primary-beige) !important;
+}
+
+/* Lock the media-text grid height so the image doesn't warp/disturb when accordion opens */
+.wp-block-media-text.zen-faq-section {
+  align-items: start !important;
 }
 
 /* Force pill gap to exactly 5px, overriding WP's native flex gap */
