@@ -324,5 +324,22 @@
       "title": "Footer",
       "area": "footer"
     }
+  ],
+  "customTemplates": [
+    {
+      "name": "page-no-title",
+      "postTypes": ["page"],
+      "title": "Page - No Title"
+    },
+    {
+      "name": "page-fullwidth",
+      "postTypes": ["page"],
+      "title": "Page - Fullwidth"
+    },
+    {
+      "name": "page-hero",
+      "postTypes": ["page"],
+      "title": "Page - Hero Builder (Behind Header)"
+    }
   ]
 }
