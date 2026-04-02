@@ -56,13 +56,17 @@
             <div class="wp-block-group zen-overlap-right">
                 <!-- wp:details {"className":"zen-faq-accordion"} -->
                 <details class="wp-block-details zen-faq-accordion"><summary>When can I pick up forgotten things?</summary>
+                <!-- wp:paragraph -->
                 <p>Please contact the front desk during normal business hours to retrieve lost or forgotten items from the locker room.</p>
+                <!-- /wp:paragraph -->
                 </details>
                 <!-- /wp:details -->
 
                 <!-- wp:details {"className":"zen-faq-accordion"} -->
                 <details class="wp-block-details zen-faq-accordion"><summary>Can I bring my dog along?</summary>
+                <!-- wp:paragraph -->
                 <p>Unfortunately, no pets are allowed within the facility to ensure the safety and quiet environment for all our guests.</p>
+                <!-- /wp:paragraph -->
                 </details>
                 <!-- /wp:details -->
             </div>
@@ -80,7 +84,9 @@
             <div class="wp-block-group zen-overlap-right">
                 <!-- wp:details {"className":"zen-faq-accordion"} -->
                 <details class="wp-block-details zen-faq-accordion"><summary>What should I wear for my first session?</summary>
+                <!-- wp:paragraph -->
                 <p>Comfortable athletic wear is recommended. We provide all necessary mats and props.</p>
+                <!-- /wp:paragraph -->
                 </details>
                 <!-- /wp:details -->
             </div>
@@ -98,7 +104,9 @@
             <div class="wp-block-group zen-overlap-right">
                 <!-- wp:details {"className":"zen-faq-accordion"} -->
                 <details class="wp-block-details zen-faq-accordion"><summary>Can I pause my membership?</summary>
+                <!-- wp:paragraph -->
                 <p>Yes, all long-term memberships can be paused for up to exactly 30 days per year due to vacation or sickness.</p>
+                <!-- /wp:paragraph -->
                 </details>
                 <!-- /wp:details -->
             </div>
