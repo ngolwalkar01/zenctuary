@@ -386,7 +386,7 @@ input[type="checkbox"] {
 
 .zen-faq-accordion {
   border: 1px solid var(--wp--preset--color--secondary-grey-light) !important;
-  border-radius: 32px !important;
+  border-radius: 23px !important;
   background: var(--wp--preset--color--primary-grey) !important;
   margin-bottom: var(--zen-space-16) !important;
   color: var(--wp--preset--color--primary-beige) !important;
@@ -397,7 +397,7 @@ input[type="checkbox"] {
 .zen-faq-accordion summary {
   list-style: none !important;
   /* Hide native triangle */
-  padding: 24px 32px !important;
+  padding: 13px 32px !important;
   font-family: var(--wp--preset--font-family--dm-sans) !important;
   font-size: 16px !important;
   font-weight: 700 !important;
