@@ -343,39 +343,52 @@ input[type="checkbox"] {
 }
 
 /* ==========================================
-   FAQ NATIVE ACCORDION (core/details)
+   FAQ OVERLAP LAYOUT & NATIVE ACCORDION
    ========================================== */
 
+.zen-overlap-right {
+  min-width: 150%;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .zen-overlap-right {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
 .zen-faq-accordion {
-  border: 1px solid var(--zen-color-border);
-  border-radius: 32px;
-  background: transparent;
-  margin-bottom: var(--zen-space-16);
-  color: var(--zen-color-text);
-  overflow: hidden;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 32px !important;
+  background: var(--wp--preset--color--secondary-grey-dark, #545454) !important;
+  margin-bottom: var(--zen-space-16) !important;
+  color: var(--zen-color-text) !important;
+  overflow: hidden !important;
+  transition: all 0.3s ease !important;
 }
 
 .zen-faq-accordion summary {
-  list-style: none; /* Hide native triangle */
-  padding: 16px 24px;
-  font-family: var(--wp--preset--font-family--dm-sans);
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  list-style: none !important; /* Hide native triangle */
+  padding: 24px 32px !important;
+  font-family: var(--wp--preset--font-family--dm-sans) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 .zen-faq-accordion summary::-webkit-details-marker {
-  display: none;
+  display: none !important;
 }
 
 /* Custom Plus Icon using pseudo-element */
 .zen-faq-accordion summary::after {
   content: "+";
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 300;
   line-height: 1;
   color: var(--zen-color-text);
@@ -388,11 +401,11 @@ input[type="checkbox"] {
 
 /* Internal Answer formatting */
 .zen-faq-accordion > *:not(summary) {
-  padding: 0 24px 24px 24px;
-  margin: 0;
-  font-size: 16px;
-  font-family: var(--wp--preset--font-family--dm-sans);
-  color: var(--zen-color-text);
+  padding: 0 32px 24px 32px !important;
+  margin: 0 !important;
+  font-size: 16px !important;
+  font-family: var(--wp--preset--font-family--dm-sans) !important;
+  color: var(--zen-color-text) !important;
 }
 
 /* ==========================================

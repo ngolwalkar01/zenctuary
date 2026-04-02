@@ -46,29 +46,49 @@
         <h3 class="wp-block-heading has-text-color" style="color:var(--wp--preset--color--primary-gold);text-transform:uppercase">General</h3>
         <!-- /wp:heading -->
 
-        <!-- wp:details {"className":"zen-faq-accordion"} -->
-        <details class="wp-block-details zen-faq-accordion"><summary>When can I pick up forgotten things?</summary>
-        <!-- wp:paragraph -->
-        <p>Please contact the front desk during normal business hours to retrieve lost or forgotten items from the locker room.</p>
-        <!-- /wp:paragraph -->
-        </details>
-        <!-- /wp:details -->
+        <!-- wp:group {"className":"zen-overlap-right","layout":{"type":"default"}} -->
+        <div class="wp-block-group zen-overlap-right">
+            <!-- wp:details {"className":"zen-faq-accordion"} -->
+            <details class="wp-block-details zen-faq-accordion"><summary>When can I pick up forgotten things?</summary>
+            <!-- wp:paragraph -->
+            <p>Please contact the front desk during normal business hours to retrieve lost or forgotten items from the locker room.</p>
+            <!-- /wp:paragraph -->
+            </details>
+            <!-- /wp:details -->
 
-        <!-- wp:details {"className":"zen-faq-accordion"} -->
-        <details class="wp-block-details zen-faq-accordion"><summary>Can I bring my dog along?</summary>
-        <!-- wp:paragraph -->
-        <p>Unfortunately, no pets are allowed within the facility to ensure the safety and quiet environment for all our guests.</p>
-        <!-- /wp:paragraph -->
-        </details>
-        <!-- /wp:details -->
-        
-        <!-- wp:details {"className":"zen-faq-accordion"} -->
-        <details class="wp-block-details zen-faq-accordion"><summary>Can I apply as a teacher?</summary>
-        <!-- wp:paragraph -->
-        <p>Yes, we are always open to meeting new talent. Please forward your CV and certifications to our management email.</p>
-        <!-- /wp:paragraph -->
-        </details>
-        <!-- /wp:details -->
+            <!-- wp:details {"className":"zen-faq-accordion"} -->
+            <details class="wp-block-details zen-faq-accordion"><summary>Can I bring my dog along?</summary>
+            <!-- wp:paragraph -->
+            <p>Unfortunately, no pets are allowed within the facility to ensure the safety and quiet environment for all our guests.</p>
+            <!-- /wp:paragraph -->
+            </details>
+            <!-- /wp:details -->
+            
+            <!-- wp:details {"className":"zen-faq-accordion"} -->
+            <details class="wp-block-details zen-faq-accordion"><summary>Can I apply as a teacher?</summary>
+            <!-- wp:paragraph -->
+            <p>Yes, we are always open to meeting new talent. Please forward your CV and certifications to our management email.</p>
+            <!-- /wp:paragraph -->
+            </details>
+            <!-- /wp:details -->
+
+            <!-- wp:details {"className":"zen-faq-accordion"} -->
+            <details class="wp-block-details zen-faq-accordion"><summary>I am pregnant - Can I come to Yoga or Pilates?</summary>
+            <!-- wp:paragraph -->
+            <p>We absolutely have pre-natal safe classes. Please inform your instructor ahead of time so they can provide the necessary modifications for your safety.</p>
+            <!-- /wp:paragraph -->
+            </details>
+            <!-- /wp:details -->
+
+            <!-- wp:details {"className":"zen-faq-accordion"} -->
+            <details class="wp-block-details zen-faq-accordion"><summary>Are you at Classpass?</summary>
+            <!-- wp:paragraph -->
+            <p>Yes, select classes are available on Classpass. Please refer to their app for our current schedule and available spots.</p>
+            <!-- /wp:paragraph -->
+            </details>
+            <!-- /wp:details -->
+        </div>
+        <!-- /wp:group -->
     </div>
     <!-- /wp:group -->
 
