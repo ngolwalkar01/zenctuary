@@ -332,8 +332,46 @@
 						return el( Button, { variant: 'primary', onClick: openProps.open }, props.buttonLabel || __( 'Select Media', 'zenctuary' ) );
 					}
 				} )
-			)
+			),
+			props.help
+				? el( 'p', { style: { margin: '8px 0 0', fontSize: '12px', opacity: 0.75 } }, props.help )
+				: null,
+			props.error
+				? el( 'p', { style: { margin: '8px 0 0', fontSize: '12px', color: '#b32d2e' } }, props.error )
+				: null
 		);
+	}
+
+	function getMediaFileSize( media ) {
+		if ( ! media || typeof media !== 'object' ) {
+			return 0;
+		}
+
+		const candidates = [
+			media.filesizeInBytes,
+			media.filesize,
+			media.fileLength,
+			media?.media_details?.filesize,
+			media?.media_details?.filesizeInBytes
+		];
+
+		for ( let index = 0; index < candidates.length; index += 1 ) {
+			const candidate = candidates[ index ];
+
+			if ( typeof candidate === 'number' && Number.isFinite( candidate ) ) {
+				return candidate;
+			}
+
+			if ( typeof candidate === 'string' ) {
+				const parsed = parseInt( candidate, 10 );
+
+				if ( Number.isFinite( parsed ) ) {
+					return parsed;
+				}
+			}
+		}
+
+		return 0;
 	}
 
 	function renderStars( card, attributes ) {
@@ -515,11 +553,13 @@
 		const [ currentSlide, setCurrentSlide ] = useState( 0 );
 		const [ viewportWidth, setViewportWidth ] = useState( window.innerWidth );
 		const [ snapOffsets, setSnapOffsets ] = useState( [ 0 ] );
+		const [ videoValidationError, setVideoValidationError ] = useState( '' );
 		const viewportRef = useRef( null );
 		const slideRefs = useRef( [] );
 		const cards = useMemo( function () {
 			return normalizeCards( attributes.cards, Math.max( 1, ( attributes.cards || [] ).length ) );
 		}, [ attributes.cards ] );
+		const maxVideoSizeInBytes = 10 * 1024 * 1024;
 
 		useEffect( function () {
 			function handleResize() {
@@ -541,10 +581,26 @@
 			} );
 		}, [ cards.length, viewportWidth, attributes.slideGap, attributes.visibleDesktop, attributes.visibleTablet, attributes.visibleMobile, attributes.carouselWidth, attributes.carouselBorderWidth ] );
 
+		useEffect( function () {
+			setVideoValidationError( '' );
+		}, [ selectedCardIndex ] );
+
 		function updateCard( index, patch ) {
 			const nextCards = cards.slice();
 			nextCards[ index ] = Object.assign( {}, nextCards[ index ], patch );
 			setAttributes( { cards: nextCards } );
+		}
+
+		function handleVideoSelect( media ) {
+			const fileSize = getMediaFileSize( media );
+
+			if ( fileSize > maxVideoSizeInBytes ) {
+				setVideoValidationError( __( 'Selected video exceeds the 10MB limit. Please choose a smaller file.', 'zenctuary' ) );
+				return;
+			}
+
+			setVideoValidationError( '' );
+			updateCard( selectedCardIndex, { videoUrl: media && media.url ? media.url : '' } );
 		}
 
 		function setCardCount( count ) {
@@ -640,8 +696,8 @@
 				selectedCard ? el(
 					PanelBody,
 					{ title: __( 'Selected Card Content', 'zenctuary' ), initialOpen: false },
-					el( SelectControl, { label: __( 'Background Type', 'zenctuary' ), value: selectedCard.mediaType, options: [ { label: __( 'Image', 'zenctuary' ), value: 'image' }, { label: __( 'Video', 'zenctuary' ), value: 'video' }, { label: __( 'Solid Color', 'zenctuary' ), value: 'color' } ], onChange: function ( value ) { updateCard( selectedCardIndex, { mediaType: value } ); } } ),
-					selectedCard.mediaType !== 'color' ? renderMediaControl( { label: __( 'Background Media', 'zenctuary' ), type: selectedCard.mediaType, allowedTypes: selectedCard.mediaType === 'video' ? [ 'video' ] : [ 'image' ], url: selectedCard.mediaType === 'video' ? selectedCard.videoUrl : selectedCard.backgroundUrl, buttonLabel: selectedCard.mediaType === 'video' ? __( 'Choose Video', 'zenctuary' ) : __( 'Choose Background', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, selectedCard.mediaType === 'video' ? { videoUrl: media.url } : { backgroundUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, selectedCard.mediaType === 'video' ? { videoUrl: '' } : { backgroundUrl: '' } ); } } ) : null,
+					el( SelectControl, { label: __( 'Background Type', 'zenctuary' ), value: selectedCard.mediaType, options: [ { label: __( 'Image', 'zenctuary' ), value: 'image' }, { label: __( 'Video', 'zenctuary' ), value: 'video' }, { label: __( 'Solid Color', 'zenctuary' ), value: 'color' } ], onChange: function ( value ) { setVideoValidationError( '' ); updateCard( selectedCardIndex, { mediaType: value } ); } } ),
+					selectedCard.mediaType !== 'color' ? renderMediaControl( { label: __( 'Background Media', 'zenctuary' ), type: selectedCard.mediaType, allowedTypes: selectedCard.mediaType === 'video' ? [ 'video' ] : [ 'image' ], url: selectedCard.mediaType === 'video' ? selectedCard.videoUrl : selectedCard.backgroundUrl, buttonLabel: selectedCard.mediaType === 'video' ? __( 'Choose Video', 'zenctuary' ) : __( 'Choose Background', 'zenctuary' ), help: selectedCard.mediaType === 'video' ? __( 'Maximum allowed video size is 10MB', 'zenctuary' ) : '', error: selectedCard.mediaType === 'video' ? videoValidationError : '', onSelect: function ( media ) { if ( selectedCard.mediaType === 'video' ) { handleVideoSelect( media ); return; } updateCard( selectedCardIndex, { backgroundUrl: media.url } ); }, onRemove: function () { setVideoValidationError( '' ); updateCard( selectedCardIndex, selectedCard.mediaType === 'video' ? { videoUrl: '' } : { backgroundUrl: '' } ); } } ) : null,
 					selectedCard.mediaType === 'video' ? renderMediaControl( { label: __( 'Video Thumbnail', 'zenctuary' ), type: 'image', allowedTypes: [ 'image' ], url: selectedCard.videoThumbnailUrl, buttonLabel: __( 'Choose Thumbnail', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, { videoThumbnailUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, { videoThumbnailUrl: '' } ); } } ) : null,
 					attributes.cardType === 'testimonial' ? renderMediaControl( { label: __( 'Profile Image', 'zenctuary' ), type: 'image', url: selectedCard.profileImageUrl, buttonLabel: __( 'Choose Profile', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, { profileImageUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, { profileImageUrl: '' } ); } } ) : null,
 					el( TextControl, { label: __( 'Background Color', 'zenctuary' ), value: selectedCard.backgroundColor, onChange: function ( value ) { updateCard( selectedCardIndex, { backgroundColor: value } ); } } ),
