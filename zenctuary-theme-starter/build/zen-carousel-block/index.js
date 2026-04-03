@@ -4,6 +4,7 @@
 	const useState = element.useState;
 	const useEffect = element.useEffect;
 	const useMemo = element.useMemo;
+	const useRef = element.useRef;
 	const registerBlockType = blocks.registerBlockType;
 	const useBlockProps = blockEditor.useBlockProps;
 	const RichText = blockEditor.RichText;
@@ -180,6 +181,31 @@
 		}
 
 		return parseFloat( attributes.visibleDesktop || 3.3 );
+	}
+
+	function getSnapOffsets( viewportNode, slideNodes ) {
+		if ( ! viewportNode || ! slideNodes.length ) {
+			return [ 0 ];
+		}
+
+		const maxOffset = Math.max( 0, viewportNode.scrollWidth - viewportNode.clientWidth );
+		const offsets = slideNodes
+			.map( function ( slideNode ) {
+				return Math.min( slideNode.offsetLeft, maxOffset );
+			} )
+			.filter( function ( offset, index, values ) {
+				return index === 0 || Math.abs( offset - values[ index - 1 ] ) > 1;
+			} );
+
+		if ( ! offsets.length ) {
+			offsets.push( 0 );
+		}
+
+		if ( Math.abs( offsets[ offsets.length - 1 ] - maxOffset ) > 1 ) {
+			offsets.push( maxOffset );
+		}
+
+		return offsets;
 	}
 
 	function getCarouselStyle( attributes ) {
@@ -445,6 +471,9 @@
 		const [ selectedCardIndex, setSelectedCardIndex ] = useState( 0 );
 		const [ currentSlide, setCurrentSlide ] = useState( 0 );
 		const [ viewportWidth, setViewportWidth ] = useState( window.innerWidth );
+		const [ snapOffsets, setSnapOffsets ] = useState( [ 0 ] );
+		const viewportRef = useRef( null );
+		const slideRefs = useRef( [] );
 		const cards = useMemo( function () {
 			return normalizeCards( attributes.cards, Math.max( 1, ( attributes.cards || [] ).length ) );
 		}, [ attributes.cards ] );
@@ -461,6 +490,14 @@
 			};
 		}, [] );
 
+		useEffect( function () {
+			const nextOffsets = getSnapOffsets( viewportRef.current, slideRefs.current.filter( Boolean ) );
+			setSnapOffsets( nextOffsets );
+			setCurrentSlide( function ( previousSlide ) {
+				return Math.max( 0, Math.min( previousSlide, nextOffsets.length - 1 ) );
+			} );
+		}, [ cards.length, viewportWidth, attributes.slideGap, attributes.visibleDesktop, attributes.visibleTablet, attributes.visibleMobile, attributes.carouselWidth, attributes.carouselBorderWidth ] );
+
 		function updateCard( index, patch ) {
 			const nextCards = cards.slice();
 			nextCards[ index ] = Object.assign( {}, nextCards[ index ], patch );
@@ -475,8 +512,7 @@
 			setCurrentSlide( Math.min( currentSlide, safeCount - 1 ) );
 		}
 
-		const slidesPerView = getSlidesPerView( attributes, viewportWidth );
-		const maxIndex = Math.max( 0, cards.length - Math.ceil( slidesPerView ) );
+		const maxIndex = Math.max( 0, snapOffsets.length - 1 );
 		const selectedCard = cards[ selectedCardIndex ] || cards[ 0 ];
 		const blockProps = useBlockProps( {
 			className: 'is-editor-preview',
@@ -625,14 +661,14 @@
 				),
 				el(
 					'div',
-					{ className: 'zen-carousel__viewport' },
+					{ className: 'zen-carousel__viewport', ref: viewportRef },
 					el(
 						'div',
-						{ className: 'zen-carousel__track', style: { transform: 'translate3d(-' + currentSlide * ( 100 / slidesPerView ) + '%, 0, 0)' } },
+						{ className: 'zen-carousel__track', style: { transform: 'translate3d(-' + ( snapOffsets[ currentSlide ] || 0 ) + 'px, 0, 0)' } },
 						cards.map( function ( card, index ) {
 							return el(
 								'div',
-								{ key: index, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
+								{ key: index, ref: function ( node ) { slideRefs.current[ index ] = node; }, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
 								el(
 									'article',
 									{ className: 'zen-carousel__card', style: { background: card.backgroundColor, minHeight: attributes.cardHeight + 'px' } },

@@ -1,24 +1,27 @@
 ( function () {
-	function getSlidesPerView( block ) {
-		const mobile = parseFloat( block.dataset.visibleMobile || '1' );
-		const tablet = parseFloat( block.dataset.visibleTablet || '2' );
-		const desktop = parseFloat( block.dataset.visibleDesktop || '3.3' );
-		const width = window.innerWidth;
-
-		if ( width <= 781 ) {
-			return mobile;
+	function getSnapOffsets( viewport, slides ) {
+		if ( ! viewport || ! slides.length ) {
+			return [ 0 ];
 		}
 
-		if ( width <= 1023 ) {
-			return tablet;
+		const maxOffset = Math.max( 0, viewport.scrollWidth - viewport.clientWidth );
+		const offsets = slides
+			.map( function ( slide ) {
+				return Math.min( slide.offsetLeft, maxOffset );
+			} )
+			.filter( function ( offset, index, values ) {
+				return index === 0 || Math.abs( offset - values[ index - 1 ] ) > 1;
+			} );
+
+		if ( ! offsets.length ) {
+			offsets.push( 0 );
 		}
 
-		return desktop;
-	}
+		if ( Math.abs( offsets[ offsets.length - 1 ] - maxOffset ) > 1 ) {
+			offsets.push( maxOffset );
+		}
 
-	function getMaxIndex( block, slidesPerView ) {
-		const slideCount = block.querySelectorAll( '.zen-carousel__slide' ).length;
-		return Math.max( 0, slideCount - Math.ceil( slidesPerView ) );
+		return offsets;
 	}
 
 	function mountCarousel( block ) {
@@ -28,6 +31,7 @@
 		const nextButton = block.querySelector( '.zen-carousel__arrow--next' );
 		const viewport = block.querySelector( '.zen-carousel__viewport' );
 		let currentIndex = 0;
+		let snapOffsets = [];
 		let startX = 0;
 		let isDragging = false;
 
@@ -44,7 +48,7 @@
 		}
 
 		function updateButtons() {
-			const maxIndex = getMaxIndex( block, getSlidesPerView( block ) );
+			const maxIndex = Math.max( 0, snapOffsets.length - 1 );
 
 			if ( prevButton ) {
 				prevButton.disabled = currentIndex <= 0;
@@ -58,15 +62,19 @@
 		}
 
 		function render() {
-			const targetSlide = slides[ currentIndex ];
-			const offset = targetSlide ? targetSlide.offsetLeft : 0;
+			const offset = snapOffsets[ currentIndex ] || 0;
 
 			track.style.transform = 'translate3d(-' + offset + 'px, 0, 0)';
 			updateButtons();
 		}
 
+		function refreshSnapOffsets() {
+			snapOffsets = getSnapOffsets( viewport, slides );
+			currentIndex = Math.max( 0, Math.min( currentIndex, snapOffsets.length - 1 ) );
+		}
+
 		function goTo( nextIndex ) {
-			const maxIndex = getMaxIndex( block, getSlidesPerView( block ) );
+			const maxIndex = Math.max( 0, snapOffsets.length - 1 );
 			currentIndex = Math.max( 0, Math.min( nextIndex, maxIndex ) );
 			render();
 		}
@@ -114,7 +122,11 @@
 			} );
 		}
 
-		window.addEventListener( 'resize', render );
+		window.addEventListener( 'resize', function () {
+			refreshSnapOffsets();
+			render();
+		} );
+		refreshSnapOffsets();
 		render();
 	}
 
