@@ -19,27 +19,19 @@
                 <h2 class="wp-block-heading has-text-color" style="color:var(--wp--preset--color--primary-gold);text-transform:uppercase">What are Zencoins?</h2>
                 <!-- /wp:heading -->
 
-                <!-- wp:group {"className":"zen-coins-group","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-                <div class="wp-block-group zen-coins-group">
+                <!-- wp:html -->
+                <div class="zen-coins-group">
                     <span class="zen-coin-icon zen-coin-icon--large"></span>
                     <span class="zen-coin-icon zen-coin-icon--large"></span>
                     <span class="zen-coin-icon zen-coin-icon--large"></span>
                 </div>
-                <!-- /wp:group -->
+                <!-- /wp:html -->
             </div>
             <!-- /wp:group -->
 
-            <!-- wp:spacer {"height":"24px"} -->
-            <div style="height:24px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
-
-            <!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--primary-beige)"}}} -->
-            <p class="has-text-color" style="color:var(--wp--preset--color--primary-beige)">To train at Zenctuary, you need "Zencoins." This is our own currency, which allows you to book your courses, workshops & Events flexibly. You purchase the desired credit package and are then free to decide how you want to use your Zencoins.</p>
+            <!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--primary-beige)"},"spacing":{"margin":{"top":"24px","bottom":"32px"}}}} -->
+            <p class="has-text-color" style="color:var(--wp--preset--color--primary-beige);margin-top:24px;margin-bottom:32px">To train at Zenctuary, you need "Zencoins." This is our own currency, which allows you to book your courses, workshops & Events flexibly. You purchase the desired credit package and are then free to decide how you want to use your Zencoins.</p>
             <!-- /wp:paragraph -->
-
-            <!-- wp:spacer {"height":"32px"} -->
-            <div style="height:32px" aria-hidden="true" class="wp-block-spacer"></div>
-            <!-- /wp:spacer -->
 
             <!-- wp:buttons -->
             <div class="wp-block-buttons">
@@ -58,7 +50,9 @@
                 
                 <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center","justifyContent":"left"}} -->
                 <div class="wp-block-group">
+                    <!-- wp:html -->
                     <span class="zen-coin-icon">1</span>
+                    <!-- /wp:html -->
                     <!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--primary-gold)"},"typography":{"textTransform":"uppercase","fontWeight":"700"}}} -->
                     <p class="has-text-color" style="color:var(--wp--preset--color--primary-gold);font-weight:700;text-transform:uppercase">Zencoin = 5 Euro</p>
                     <!-- /wp:paragraph -->
@@ -87,11 +81,11 @@
                         <!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--primary-gold)"},"typography":{"textTransform":"uppercase","fontWeight":"700"}}} -->
                         <p class="has-text-color" style="color:var(--wp--preset--color--primary-gold);font-weight:700;text-transform:uppercase">Zencoins:</p>
                         <!-- /wp:paragraph -->
-                        <!-- wp:group {"className":"zen-coins-group","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-                        <div class="wp-block-group zen-coins-group">
+                        <!-- wp:html -->
+                        <div class="zen-coins-group">
                             <span class="zen-coin-icon">5</span>
                         </div>
-                        <!-- /wp:group -->
+                        <!-- /wp:html -->
                     </div>
                     <!-- /wp:group -->
                 </div>
@@ -119,12 +113,12 @@
                         <!-- wp:paragraph {"style":{"color":{"text":"var(--wp--preset--color--primary-gold)"},"typography":{"textTransform":"uppercase","fontWeight":"700"}}} -->
                         <p class="has-text-color" style="color:var(--wp--preset--color--primary-gold);font-weight:700;text-transform:uppercase">Zencoins:</p>
                         <!-- /wp:paragraph -->
-                        <!-- wp:group {"className":"zen-coins-group","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-                        <div class="wp-block-group zen-coins-group">
+                        <!-- wp:html -->
+                        <div class="zen-coins-group">
                             <span class="zen-coin-icon">6</span>
                             <span class="zen-coin-icon">8</span>
                         </div>
-                        <!-- /wp:group -->
+                        <!-- /wp:html -->
                     </div>
                     <!-- /wp:group -->
                 </div>
