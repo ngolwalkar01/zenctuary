@@ -671,7 +671,7 @@
 								{ key: index, ref: function ( node ) { slideRefs.current[ index ] = node; }, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
 								el(
 									'article',
-									{ className: 'zen-carousel__card', style: { background: card.backgroundColor, minHeight: attributes.cardHeight + 'px' } },
+									{ className: 'zen-carousel__card', style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' } },
 									renderCardBody( { card: card, attributes: attributes, editable: index === selectedCardIndex, updateCard: function ( patch ) { updateCard( index, patch ); } } )
 								)
 							);
@@ -723,7 +723,7 @@
 							{ key: index, className: 'zen-carousel__slide' },
 							el(
 								'article',
-								{ className: 'zen-carousel__card', style: { background: card.backgroundColor, minHeight: attributes.cardHeight + 'px' } },
+								{ className: 'zen-carousel__card', style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' } },
 								renderCardBody( { card: card, attributes: attributes, editable: false, updateCard: function () {} } )
 							)
 						);
