@@ -173,7 +173,76 @@
 
 .zen-btn--small {
   min-height: var(--zen-btn-height-sm);
-  padding: 8px;
+  padding: 8px 24px;
+}
+
+/* ==========================================
+   FORM ELEMENTS
+   ========================================== */
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="tel"],
+textarea {
+  min-height: 52px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid var(--wp--preset--color--secondary-grey-light, #9A9A9A);
+  background-color: var(--wp--preset--color--primary-grey, #3F3E3E);
+  color: var(--wp--preset--color--primary-beige, #F6F2EA);
+  font-family: var(--wp--preset--font-family--dm-sans, sans-serif);
+  font-size: 14px;
+  line-height: 1.4;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--wp--preset--color--primary-beige);
+  background-color: var(--wp--preset--color--primary-beige);
+  color: var(--wp--preset--color--primary-grey);
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  border: 2px solid var(--wp--preset--color--secondary-grey-light);
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--wp--preset--color--primary-gold);
+  border-color: var(--wp--preset--color--primary-gold);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: var(--wp--preset--color--primary-grey);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.zen-input--error {
+  border-color: var(--wp--preset--color--error, #FF4A4A) !important;
 }
 
 /* ==========================================

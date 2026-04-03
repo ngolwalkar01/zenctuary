@@ -79,7 +79,7 @@
         },
         {
           "slug": "body",
-          "size": "16px",
+          "size": "clamp(16px, 1.25vw + 11px, 18px)",
           "name": "Body"
         },
         {
@@ -246,11 +246,11 @@
     "spacing": {
       "padding": {
         "top": "0",
-        "right": "max(24px, 5vw)",
+        "right": "clamp(32px, 8.3vw, 120px)",
         "bottom": "0",
-        "left": "max(24px, 5vw)"
+        "left": "clamp(32px, 8.3vw, 120px)"
       },
-      "blockGap": "120px"
+      "blockGap": "clamp(120px, 12.5vw, 180px)"
     },
     "elements": {
       "heading": {
@@ -338,17 +338,23 @@
   "customTemplates": [
     {
       "name": "page-no-title",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - No Title"
     },
     {
       "name": "page-fullwidth",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - Fullwidth"
     },
     {
       "name": "page-hero",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - Hero Builder (Behind Header)"
     }
   ]
