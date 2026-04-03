@@ -3,44 +3,10 @@
 @import url("utilities.css");
 body { font-family: "DM Sans", sans-serif; }
 
-/* ==========================================
-   EDITOR FIXES FOR CONTACT MAP
-   ========================================== */
-
-/* Fix the layout wrappers so they don't block the absolute positioning */
-.block-editor-block-list__block.zen-contact-section {
-    position: relative !important;
-}
-
-.block-editor-block-list__block.zen-contact-overlay {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 100% !important;
-    max-width: 440px !important;
-    z-index: 10 !important;
-    margin: 0 !important; 
-}
-
-/* Ensure inner overlay isn't double positioned inside the wrapper */
-.block-editor-block-list__block.zen-contact-overlay > .wp-block-group {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
+/* In the admin editor, disable the floating absolute overlap for the map overlay to prevent unclickable chaotic layout issues */
+.editor-styles-wrapper .zen-contact-overlay {
+    position: static !important;
     transform: none !important;
-    margin: 0 !important;
+    margin: 24px auto !important;
     width: 100% !important;
-}
-
-/* Fix image nesting behavior where Gutenberg wraps the image */
-.zen-contact-section .wp-block-image > div,
-.zen-contact-section .components-resizable-box__container {
-    height: 680px !important;
-}
-
-.zen-contact-section img,
-.zen-contact-section iframe {
-    height: 680px !important;
-    object-fit: cover !important;
 }
