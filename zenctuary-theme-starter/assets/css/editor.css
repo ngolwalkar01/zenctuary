@@ -4,7 +4,7 @@
 body { font-family: "DM Sans", sans-serif; }
 
 /* In the admin editor, disable the floating absolute overlap for the map overlay to prevent unclickable chaotic layout issues */
-.editor-styles-wrapper .zen-contact-overlay {
+.zen-contact-overlay {
     position: static !important;
     transform: none !important;
     margin: 24px auto !important;
