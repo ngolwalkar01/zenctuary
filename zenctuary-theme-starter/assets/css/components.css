@@ -639,6 +639,11 @@ input[type="checkbox"] {
   line-height: 0;
 }
 
+.zen-faq-block-group {
+  padding-right: 15%;
+  padding-left: 15%;
+}
+
 /* ==========================================
    RESPONSIVE
    ========================================== */
@@ -711,6 +716,11 @@ input[type="checkbox"] {
   .zen-feature-item .wp-block-group {
     grid-column: 2;
     grid-row: 2;
+  }
+
+  .zen-faq-block-group {
+    padding-right: 0;
+    padding-left: 0;
   }
 
   /* Responsive F.A.Q Categories */
