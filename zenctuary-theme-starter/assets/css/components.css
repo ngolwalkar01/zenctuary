@@ -663,8 +663,8 @@ input[type="checkbox"] {
 
   .zen-section,
   .zen-section--compact {
-    padding-top: var(--zen-space-120);
-    padding-bottom: var(--zen-space-120);
+    padding-top: var(--zen-space-50);
+    padding-bottom: var(--zen-space-50);
     padding-right: var(--zen-space-50);
     padding-left: var(--zen-space-50);
   }
