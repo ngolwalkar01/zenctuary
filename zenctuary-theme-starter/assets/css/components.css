@@ -638,7 +638,9 @@ input[type="checkbox"] {
 .zen-faq-section .wp-block-group.is-layout-flow:not(.zen-overlap-right):not(.zen-faq-group) {
   padding-right: 15%;
   padding-left: 15%;
-}/* ==========================================
+}
+
+/* ==========================================
    CONTACT MAP SECTION
    ========================================== */
 
@@ -675,7 +677,7 @@ input[type="checkbox"] {
   padding: 48px 64px !important;
   min-width: 440px;
   z-index: 10;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .zen-contact-item {
@@ -696,6 +698,10 @@ input[type="checkbox"] {
   height: 24px;
   color: var(--wp--preset--color--primary-gold);
   flex-shrink: 0;
+}
+
+.zen-about-image-block {
+  width: var(--zen-image-block-width);
 }
 
 /* ==========================================
@@ -828,17 +834,19 @@ input[type="checkbox"] {
   .zen-contact-section .wp-block-columns {
     flex-direction: column !important;
   }
+
   .zen-contact-section .wp-block-image,
   .zen-contact-section .wp-block-image img,
   .zen-contact-section iframe {
-    height: 400px; 
+    height: 400px;
   }
+
   .zen-contact-overlay {
     position: relative;
     top: auto;
     left: auto;
     transform: none;
-    margin: -100px auto 32px auto !important; 
+    margin: -100px auto 32px auto !important;
     width: 90% !important;
     min-width: 0;
     padding: 32px !important;
