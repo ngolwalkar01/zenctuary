@@ -14,6 +14,7 @@
   --zen-arrow-bg: rgba(63, 62, 62, 0.55);
   --zen-arrow-color: #f6f2ea;
   --zen-arrow-active-color: #d8b354;
+  --zen-arrow-active-bg: rgba(216, 179, 84, 0.2);
   --zen-arrow-radius: 999px;
   --zen-dot-size: 6px;
   --zen-dot-spacing: 8px;
@@ -65,10 +66,15 @@
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__arrow:hover,
-.wp-block-zenctuary-zen-carousel-block .zen-carousel__arrow:focus-visible,
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__arrow:focus-visible {
+  color: var(--zen-arrow-active-color);
+  border-color: var(--zen-arrow-active-color);
+}
+
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__arrow.is-active {
   color: var(--zen-arrow-active-color);
   border-color: var(--zen-arrow-active-color);
+  background: var(--zen-arrow-active-bg);
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__arrow:disabled {

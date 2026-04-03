@@ -58,6 +58,7 @@
     "arrowBackgroundColor": { "type": "string", "default": "rgba(63, 62, 62, 0.55)" },
     "arrowColor": { "type": "string", "default": "#f6f2ea" },
     "arrowActiveColor": { "type": "string", "default": "#d8b354" },
+    "arrowActiveBackgroundColor": { "type": "string", "default": "rgba(216, 179, 84, 0.2)" },
     "arrowRadius": { "type": "string", "default": "999px" },
     "profileSize": { "type": "number", "default": 58 },
     "profileBorderWidth": { "type": "number", "default": 2 },
