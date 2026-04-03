@@ -16,8 +16,8 @@
 .zen-section {
   padding-top: var(--zen-space-180);
   padding-bottom: var(--zen-space-180);
-  padding-top: var(--zen-space-120);
-  padding-bottom: var(--zen-space-120);
+  padding-left: var(--zen-space-120);
+  padding-right: var(--zen-space-120);
 }
 
 .zen-section--compact {
