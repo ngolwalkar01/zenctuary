@@ -31,6 +31,7 @@
 			buttonText: 'Explore',
 			buttonUrl: '#',
 			backgroundUrl: '',
+			videoThumbnailUrl: '',
 			profileImageUrl: '',
 			videoUrl: '',
 			backgroundColor: '#4b4947',
@@ -404,15 +405,13 @@
 				return null;
 			}
 
-			if ( card.mediaType === 'video' && card.videoUrl ) {
+			if ( card.mediaType === 'video' ) {
 				return el(
 					'div',
 					{ className: 'zen-carousel__card-media zen-carousel__card-media--video' },
-					el(
-						'div',
-						{ className: 'zen-carousel__video-preview', 'aria-hidden': 'true' },
-						el( 'span', { className: 'zen-carousel__video-preview-icon' }, playIcon() )
-					)
+					card.videoThumbnailUrl
+						? el( 'img', { src: card.videoThumbnailUrl, alt: '' } )
+						: el( 'div', { className: 'zen-carousel__video-preview', 'aria-hidden': 'true' } )
 				);
 			}
 
@@ -423,7 +422,12 @@
 			return null;
 		}
 
-		const innerStyle = { background: card.backgroundColor };
+		const innerStyle = {
+			background:
+				card.mediaType === 'color' || ( card.mediaType === 'image' && ! card.backgroundUrl )
+					? card.backgroundColor
+					: 'transparent'
+		};
 
 		if ( cardType === 'testimonial' ) {
 			return el(
@@ -443,16 +447,17 @@
 					el(
 						'div',
 						{ className: 'zen-carousel__testimonial-body' },
-						card.mediaType === 'video'
-							? el( 'button', { type: 'button', className: 'zen-carousel__video-play', 'aria-label': __( 'Play testimonial video', 'zenctuary' ) }, playIcon() )
-							: editable
+						editable
 							? el( RichText, { tagName: 'p', className: 'zen-carousel__content', value: card.content, onChange: function ( nextValue ) { updateCard( { content: nextValue } ); }, placeholder: __( 'Write testimonial text...', 'zenctuary' ) } )
 							: el( 'p', { className: 'zen-carousel__content' }, content )
 					),
 					editable
 						? el( RichText, { tagName: 'p', className: 'zen-carousel__client', value: card.clientName, onChange: function ( nextValue ) { updateCard( { clientName: nextValue } ); }, placeholder: __( 'Client name', 'zenctuary' ) } )
 						: el( 'p', { className: 'zen-carousel__client' }, card.clientName )
-				)
+				),
+				card.mediaType === 'video' && card.videoUrl
+					? el( 'span', { className: 'zen-carousel__video-play', 'aria-hidden': 'true' }, playIcon() )
+					: null
 			);
 		}
 
@@ -494,7 +499,10 @@
 						}
 					)
 				)
-			)
+			),
+			card.mediaType === 'video' && card.videoUrl
+				? el( 'span', { className: 'zen-carousel__video-play', 'aria-hidden': 'true' }, playIcon() )
+				: null
 		);
 	}
 
@@ -632,6 +640,7 @@
 					{ title: __( 'Selected Card Content', 'zenctuary' ), initialOpen: false },
 					el( SelectControl, { label: __( 'Background Type', 'zenctuary' ), value: selectedCard.mediaType, options: [ { label: __( 'Image', 'zenctuary' ), value: 'image' }, { label: __( 'Video', 'zenctuary' ), value: 'video' }, { label: __( 'Solid Color', 'zenctuary' ), value: 'color' } ], onChange: function ( value ) { updateCard( selectedCardIndex, { mediaType: value } ); } } ),
 					selectedCard.mediaType !== 'color' ? renderMediaControl( { label: __( 'Background Media', 'zenctuary' ), type: selectedCard.mediaType, allowedTypes: selectedCard.mediaType === 'video' ? [ 'video' ] : [ 'image' ], url: selectedCard.mediaType === 'video' ? selectedCard.videoUrl : selectedCard.backgroundUrl, buttonLabel: __( 'Choose Background', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, selectedCard.mediaType === 'video' ? { videoUrl: media.url } : { backgroundUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, selectedCard.mediaType === 'video' ? { videoUrl: '' } : { backgroundUrl: '' } ); } } ) : null,
+					selectedCard.mediaType === 'video' ? renderMediaControl( { label: __( 'Video Thumbnail', 'zenctuary' ), type: 'image', allowedTypes: [ 'image' ], url: selectedCard.videoThumbnailUrl, buttonLabel: __( 'Choose Thumbnail', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, { videoThumbnailUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, { videoThumbnailUrl: '' } ); } } ) : null,
 					attributes.cardType === 'testimonial' ? renderMediaControl( { label: __( 'Profile Image', 'zenctuary' ), type: 'image', url: selectedCard.profileImageUrl, buttonLabel: __( 'Choose Profile', 'zenctuary' ), onSelect: function ( media ) { updateCard( selectedCardIndex, { profileImageUrl: media.url } ); }, onRemove: function () { updateCard( selectedCardIndex, { profileImageUrl: '' } ); } } ) : null,
 					el( TextControl, { label: __( 'Background Color', 'zenctuary' ), value: selectedCard.backgroundColor, onChange: function ( value ) { updateCard( selectedCardIndex, { backgroundColor: value } ); } } ),
 					el( TextControl, { label: __( 'Overlay Color', 'zenctuary' ), value: selectedCard.overlayColor, onChange: function ( value ) { updateCard( selectedCardIndex, { overlayColor: value } ); } } ),

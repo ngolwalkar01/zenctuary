@@ -147,30 +147,9 @@
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background:
     radial-gradient(circle at center, rgba(216, 179, 84, 0.18), rgba(0, 0, 0, 0) 48%),
     linear-gradient(160deg, rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.45));
-}
-
-.wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview-icon {
-  width: 74px;
-  height: 74px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.55);
-  color: #f6f2ea;
-  border: 1px solid rgba(246, 242, 234, 0.25);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview-icon svg {
-  width: 22px;
-  height: 22px;
-  margin-left: 3px;
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__card-overlay {
@@ -328,6 +307,10 @@
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
   width: 72px;
   height: 72px;
   border-radius: 999px;
@@ -337,7 +320,8 @@
   align-items: center;
   justify-content: center;
   border: 0;
-  margin: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__video-play svg {
