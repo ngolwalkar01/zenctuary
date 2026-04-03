@@ -635,7 +635,7 @@ input[type="checkbox"] {
   line-height: 0;
 }
 
-.zen-faq-section .wp-block-group.is-layout-flow {
+.zen-faq-section .wp-block-group.is-layout-flow:not(.zen-overlap-right):not(.zen-faq-group) {
   padding-right: 15%;
   padding-left: 15%;
 }
@@ -714,7 +714,7 @@ input[type="checkbox"] {
     grid-row: 2;
   }
 
-  .zen-faq-section .wp-block-group.is-layout-flow {
+  .zen-faq-section .wp-block-group.is-layout-flow:not(.zen-overlap-right):not(.zen-faq-group) {
     padding-right: 0;
     padding-left: 0;
   }
