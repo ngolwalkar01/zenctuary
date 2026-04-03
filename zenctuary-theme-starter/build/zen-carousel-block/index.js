@@ -40,7 +40,8 @@
 			titleLimit: 48,
 			contentLimit: 110,
 			courseLimit: 48,
-			rating: 4.5
+			rating: 4.5,
+			starColor: '#d8b355'
 		};
 	}
 
@@ -239,7 +240,6 @@
 				'--zen-profile-border-color': attributes.profileBorderColor,
 				'--zen-profile-border-radius': attributes.profileBorderRadius,
 				'--zen-star-size': attributes.starSize + 'px',
-				'--zen-star-color': attributes.starColor,
 				'--zen-button-text-color': attributes.buttonTextColor,
 				'--zen-button-bg': attributes.buttonBackgroundColor,
 				'--zen-button-border-color': attributes.buttonBorderColor,
@@ -334,14 +334,39 @@
 	}
 
 	function renderStars( card, attributes ) {
-		const stars = new Array( attributes.starCount ).fill( '\u2605' ).join( '' );
-		const fillWidth = Math.max( 0, Math.min( card.rating / attributes.starCount, 1 ) ) * 100;
+		const totalStars = Math.max( 1, parseInt( attributes.starCount, 10 ) || 5 );
+		const rating = Math.round( Math.max( 0, Math.min( parseFloat( card.rating ) || 0, totalStars ) ) * 2 ) / 2;
+		const starColor = card.starColor || '#d8b355';
 
 		return el(
 			'div',
-			{ className: 'zen-carousel__stars', 'aria-label': String( card.rating ) + ' out of ' + String( attributes.starCount ) },
-			el( 'span', null, stars ),
-			el( 'span', { className: 'zen-carousel__stars-fill', style: { width: fillWidth + '%' } }, stars )
+			{
+				className: 'zen-carousel__stars',
+				style: { '--zen-card-star-color': starColor },
+				'aria-label': String( rating ) + ' out of ' + String( totalStars )
+			},
+			new Array( totalStars ).fill( null ).map( function ( value, index ) {
+				const starFill = Math.max( 0, Math.min( rating - index, 1 ) ) * 100;
+
+				return el(
+					'span',
+					{ key: index, className: 'zen-carousel__star', 'aria-hidden': 'true' },
+					el(
+						'svg',
+						{ viewBox: '0 0 24 24', fill: 'currentColor', xmlns: 'http://www.w3.org/2000/svg' },
+						el( 'path', { d: 'M12 2.6 14.88 8.42 21.31 9.35 16.65 13.9 17.75 20.3 12 17.28 6.25 20.3 7.35 13.9 2.69 9.35 9.12 8.42 12 2.6Z' } )
+					),
+					el(
+						'span',
+						{ className: 'zen-carousel__star-fill', style: { width: starFill + '%' } },
+						el(
+							'svg',
+							{ viewBox: '0 0 24 24', fill: 'currentColor', xmlns: 'http://www.w3.org/2000/svg' },
+							el( 'path', { d: 'M12 2.6 14.88 8.42 21.31 9.35 16.65 13.9 17.75 20.3 12 17.28 6.25 20.3 7.35 13.9 2.69 9.35 9.12 8.42 12 2.6Z' } )
+						)
+					)
+				);
+			} )
 		);
 	}
 
@@ -606,7 +631,8 @@
 					el( RangeControl, { label: __( 'Title Character Limit', 'zenctuary' ), value: selectedCard.titleLimit, onChange: function ( value ) { updateCard( selectedCardIndex, { titleLimit: value } ); }, min: 10, max: 120 } ),
 					el( RangeControl, { label: __( 'Content Character Limit', 'zenctuary' ), value: selectedCard.contentLimit, onChange: function ( value ) { updateCard( selectedCardIndex, { contentLimit: value } ); }, min: 20, max: 240 } ),
 					attributes.cardType === 'teacher' ? el( RangeControl, { label: __( 'Course Name Character Limit', 'zenctuary' ), value: selectedCard.courseLimit, onChange: function ( value ) { updateCard( selectedCardIndex, { courseLimit: value } ); }, min: 10, max: 120 } ) : null,
-					attributes.cardType === 'testimonial' ? el( RangeControl, { label: __( 'Rating', 'zenctuary' ), value: selectedCard.rating, onChange: function ( value ) { updateCard( selectedCardIndex, { rating: value } ); }, min: 0, max: attributes.starCount, step: 0.5 } ) : null
+					attributes.cardType === 'testimonial' ? el( RangeControl, { label: __( 'Rating', 'zenctuary' ), value: selectedCard.rating, onChange: function ( value ) { updateCard( selectedCardIndex, { rating: value } ); }, min: 0, max: attributes.starCount, step: 0.5 } ) : null,
+					attributes.cardType === 'testimonial' ? el( TextControl, { label: __( 'Star Color (Selected Card)', 'zenctuary' ), value: selectedCard.starColor || '#d8b355', onChange: function ( value ) { updateCard( selectedCardIndex, { starColor: value || '#d8b355' } ); } } ) : null
 				) : null,
 				el(
 					PanelBody,
@@ -639,7 +665,6 @@
 					el( UnitControl, { label: __( 'Profile Radius', 'zenctuary' ), value: attributes.profileBorderRadius, onChange: function ( value ) { setAttributes( { profileBorderRadius: value || '999px' } ); } } ),
 					el( RangeControl, { label: __( 'Star Count', 'zenctuary' ), value: attributes.starCount, onChange: function ( value ) { setAttributes( { starCount: value } ); }, min: 1, max: 10 } ),
 					el( RangeControl, { label: __( 'Star Size', 'zenctuary' ), value: attributes.starSize, onChange: function ( value ) { setAttributes( { starSize: value } ); }, min: 10, max: 32 } ),
-					el( TextControl, { label: __( 'Star Color', 'zenctuary' ), value: attributes.starColor, onChange: function ( value ) { setAttributes( { starColor: value } ); } } ),
 					el( TextControl, { label: __( 'Testimonial Text Color', 'zenctuary' ), value: attributes.testimonialTextColor, onChange: function ( value ) { setAttributes( { testimonialTextColor: value } ); } } ),
 					el( TextControl, { label: __( 'Play Button Color', 'zenctuary' ), value: attributes.playButtonColor, onChange: function ( value ) { setAttributes( { playButtonColor: value } ); } } ),
 					el( TextControl, { label: __( 'Play Button Background', 'zenctuary' ), value: attributes.playButtonBackground, onChange: function ( value ) { setAttributes( { playButtonBackground: value } ); } } )

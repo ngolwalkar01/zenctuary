@@ -23,7 +23,6 @@
   --zen-profile-border-color: #f6f2ea;
   --zen-profile-border-radius: 999px;
   --zen-star-size: 18px;
-  --zen-star-color: #d8b355;
   --zen-testimonial-text-color: #f6f2ea;
   --zen-play-button-color: #f6f2ea;
   --zen-play-button-bg: rgba(0, 0, 0, 0.45);
@@ -269,19 +268,30 @@
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__stars {
-  position: relative;
-  font-size: var(--zen-star-size);
-  line-height: 1;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
 }
 
-.wp-block-zenctuary-zen-carousel-block .zen-carousel__stars-fill {
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__star {
+  position: relative;
+  width: var(--zen-star-size);
+  height: var(--zen-star-size);
+  color: #111111;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__star svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__star-fill {
   position: absolute;
   inset: 0 auto 0 0;
   overflow: hidden;
-  white-space: nowrap;
-  color: var(--zen-star-color);
+  color: var(--zen-card-star-color, #d8b355);
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__video-play {
