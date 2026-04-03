@@ -8,11 +8,11 @@ body { font-family: "DM Sans", sans-serif; }
    ========================================== */
 
 /* Fix the layout wrappers so they don't block the absolute positioning */
-.block-editor-block-list__block:has(> .zen-contact-section) {
+.block-editor-block-list__block.zen-contact-section {
     position: relative !important;
 }
 
-.block-editor-block-list__block:has(> .zen-contact-overlay) {
+.block-editor-block-list__block.zen-contact-overlay {
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -24,7 +24,7 @@ body { font-family: "DM Sans", sans-serif; }
 }
 
 /* Ensure inner overlay isn't double positioned inside the wrapper */
-.block-editor-block-list__block > .zen-contact-overlay {
+.block-editor-block-list__block.zen-contact-overlay > .wp-block-group {
     position: relative !important;
     top: auto !important;
     left: auto !important;
