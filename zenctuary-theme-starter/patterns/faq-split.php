@@ -7,13 +7,9 @@
 ?>
 <!-- wp:media-text {"align":"full","mediaPosition":"right","mediaType":"image","imageFill":true,"backgroundColor":"secondary-grey-dark","className":"zen-faq-section"} -->
 <div class="wp-block-media-text alignfull has-media-on-the-right is-stacked-on-mobile is-image-fill zen-faq-section has-secondary-grey-dark-background-color has-background"><figure class="wp-block-media-text__media" style="background-image:url(https://s.w.org/images/core/2.0.1/water.jpg);background-position:50% 50%"><img src="https://s.w.org/images/core/2.0.1/water.jpg" alt=""/></figure><div class="wp-block-media-text__content">
-    
-    <!-- wp:spacer {"height":"80px"} -->
-    <div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-    <!-- /wp:spacer -->
 
     <!-- wp:group {"style":{"spacing":{"padding":{"right":"15%","left":"15%"}}},"layout":{"type":"default"}} -->
-    <div class="wp-block-group" style="padding-right:15%;padding-left:15%">
+    <div class="wp-block-group zen-faq-block-group">
         <!-- wp:heading {"level":3,"style":{"typography":{"textTransform":"uppercase"},"color":{"text":"var(--wp--preset--color--primary-gold)"}}} -->
         <h3 class="wp-block-heading has-text-color" style="color:var(--wp--preset--color--primary-gold);text-transform:uppercase">F.A.Q Categories</h3>
         <!-- /wp:heading -->
@@ -116,10 +112,6 @@
         
     </div>
     <!-- /wp:group -->
-
-     <!-- wp:spacer {"height":"80px"} -->
-    <div style="height:80px" aria-hidden="true" class="wp-block-spacer"></div>
-    <!-- /wp:spacer -->
 
 </div></div>
 <!-- /wp:media-text -->

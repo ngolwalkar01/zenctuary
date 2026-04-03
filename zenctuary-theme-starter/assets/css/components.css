@@ -532,6 +532,11 @@ input[type="checkbox"] {
   color: var(--wp--preset--color--primary-beige) !important;
 }
 
+.zen-faq-block-group {
+  padding-right: 15%;
+  padding-left: 15%
+}
+
 /* ==========================================
    POPUP SHELL
    ========================================== */
@@ -659,6 +664,8 @@ input[type="checkbox"] {
   .zen-section--compact {
     padding-top: var(--zen-space-120);
     padding-bottom: var(--zen-space-120);
+    padding-right: var(--zen-space-50);
+    padding-left: var(--zen-space-50);
   }
 
   .zen-card {
@@ -685,6 +692,8 @@ input[type="checkbox"] {
     row-gap: 16px !important;
     align-items: start;
     gap: 0;
+    justify-items: start;
+    margin-bottom: 24px !important;
   }
 
   .zen-feature-item::before {
@@ -708,7 +717,13 @@ input[type="checkbox"] {
   :root :where(.zen-faq-section .is-layout-flex),
   .zen-faq-section .wp-block-buttons {
     flex-wrap: wrap !important;
-    gap: 8px !important;
+    gap: 0 !important;
+  }
+
+  :root :where(.zen-faq-section .is-layout-flex) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   /* Zencoin Mobile Adjustments */
@@ -722,5 +737,18 @@ input[type="checkbox"] {
     width: 40px;
     height: 40px;
     font-size: 16px;
+  }
+
+  .zen-faq-section .wp-block-media-text__media {
+    display: none;
+  }
+
+  .zen-overlap-right {
+    min-width: 100%;
+  }
+
+  .zen-faq-block-group {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
