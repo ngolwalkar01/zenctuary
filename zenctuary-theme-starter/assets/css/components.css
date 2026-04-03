@@ -1,0 +1,552 @@
+/* ==========================================
+   LAYOUT COMPONENTS
+   ========================================== */
+
+.zen-container {
+  width: 100%;
+  max-width: var(--zen-container);
+  margin-inline: auto;
+}
+
+.zen-page-padding {
+  padding-left: var(--zen-page-pad-x);
+  padding-right: var(--zen-page-pad-x);
+}
+
+.zen-section {
+  padding-top: var(--zen-space-180);
+  padding-bottom: var(--zen-space-180);
+}
+
+.zen-section--compact {
+  padding-top: var(--zen-space-120);
+  padding-bottom: var(--zen-space-120);
+}
+
+.zen-section-title {
+  margin-bottom: var(--zen-space-24);
+}
+
+.zen-section-intro {
+  max-width: 720px;
+}
+
+.zen-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--zen-space-32);
+  align-items: center;
+}
+
+.zen-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--zen-space-32);
+}
+
+.zen-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--zen-space-32);
+}
+
+/* ==========================================
+   HEADER / FOOTER
+   ========================================== */
+
+.zen-site-header {
+  min-height: var(--zen-header-height);
+  position: relative;
+  z-index: 20;
+}
+
+.zen-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent !important;
+}
+
+/* Hide WooCommerce auto-injected Header Icons */
+.wc-block-mini-cart,
+.site-header-cart,
+.wp-block-woocommerce-mini-cart,
+.wp-block-woocommerce-customer-account {
+  display: none !important;
+}
+
+
+.zen-site-footer {
+  padding-top: var(--zen-space-64);
+  padding-bottom: var(--zen-space-32);
+}
+
+/* ==========================================
+   WPML NATIVE DROPDOWN OVERRIDES
+   ========================================== */
+.wpml-ls-legacy-dropdown a,
+.wpml-ls-legacy-dropdown a:hover,
+.wpml-ls-legacy-dropdown a:focus {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.wpml-ls-legacy-dropdown .wpml-ls-sub-menu {
+  border: none !important;
+  background-color: var(--zen-color-bg) !important;
+  border-radius: var(--zen-radius-card-mobile, 8px) !important;
+  padding: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.wpml-ls-legacy-dropdown {
+  width: auto !important;
+}
+
+/* Hide WPML arrow and native text if present */
+.wpml-ls-legacy-dropdown .wpml-ls-item-toggle:after {
+  display: none !important;
+}
+
+.wpml-ls-legacy-dropdown .wpml-ls-native,
+.wpml-ls-legacy-dropdown .wpml-ls-display {
+  display: none !important;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+
+.zen-btn,
+.wp-element-button,
+.wp-block-button__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--zen-space-8);
+  min-height: var(--zen-btn-height-lg);
+  padding: 16px 32px;
+  border-radius: var(--zen-radius-btn);
+  border: var(--zen-border-width) solid transparent;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.zen-btn--primary {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-btn--primary:hover {
+  background: transparent;
+  color: var(--zen-color-gold);
+}
+
+.zen-btn--outline-gold {
+  background: transparent;
+  color: var(--zen-color-gold);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-btn--outline-gold:hover {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+}
+
+.zen-btn--outline-neutral {
+  background: transparent;
+  color: var(--zen-color-text);
+  border-color: var(--zen-color-border);
+}
+
+.zen-btn--outline-neutral:hover {
+  border-color: var(--zen-color-gold);
+  color: var(--zen-color-gold);
+}
+
+.zen-btn--small {
+  min-height: var(--zen-btn-height-sm);
+  padding: 8px;
+}
+
+/* ==========================================
+   CARDS
+   ========================================== */
+
+.zen-card {
+  background: var(--zen-color-bg);
+  border: var(--zen-border-width) solid var(--zen-color-border);
+  border-radius: var(--zen-radius-card);
+  padding: 32px;
+  overflow: hidden;
+}
+
+.zen-card--alt {
+  background: var(--zen-color-bg-alt);
+}
+
+.zen-card--gold {
+  background: var(--zen-color-gold);
+  color: var(--zen-color-bg);
+  border-color: var(--zen-color-gold);
+}
+
+.zen-card--beige {
+  background: var(--zen-color-text);
+  color: var(--zen-color-bg);
+}
+
+.zen-card__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--zen-space-24);
+}
+
+/* ==========================================
+   HERO
+   ========================================== */
+
+.zen-hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+}
+
+.zen-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.zen-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zen-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.35);
+}
+
+.zen-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================
+   SPLIT SECTION
+   ========================================== */
+
+.zen-split-media img {
+  width: 100%;
+  border-radius: var(--zen-radius-card);
+  display: block;
+}
+
+/* ==========================================
+   FORMS
+   ========================================== */
+
+.zen-input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  min-height: var(--zen-input-height);
+  padding: 16px;
+  border-radius: var(--zen-radius-input);
+  border: var(--zen-border-width) solid var(--zen-color-border);
+  background: var(--zen-color-bg);
+  color: var(--zen-color-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.zen-input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--zen-color-gold);
+}
+
+.zen-field-error,
+input.is-error,
+textarea.is-error,
+select.is-error {
+  border-color: var(--zen-color-error);
+}
+
+.zen-checkbox,
+input[type="checkbox"] {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: var(--zen-border-width) solid var(--zen-color-border);
+}
+
+/* ==========================================
+   NEWSLETTER
+   ========================================== */
+
+.zen-newsletter-input-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.zen-input-newsletter {
+  background: transparent !important;
+  border: 1px solid var(--zen-color-muted) !important;
+  padding-right: 50px !important;
+}
+
+.zen-newsletter-submit {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--zen-color-text);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.zen-newsletter-privacy {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.zen-checkbox-small {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+}
+
+/* ==========================================
+   FAQ OVERLAP LAYOUT & NATIVE ACCORDION
+   ========================================== */
+
+.zen-overlap-right {
+  min-width: 200%;
+  max-width: none !important;
+  margin-right: -35%;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .zen-overlap-right {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* Perfect shrinking for category tabs in FAQs */
+.zen-faq-section .wp-block-button__link {
+  font-size: 13px !important;
+  padding: 6px 20px !important;
+  min-height: auto !important;
+  border-radius: 24px !important; /* Forces the pill shape! */
+  font-weight: 600 !important;
+}
+
+/* Fix active Primary Tab square-block disturbance */
+.zen-faq-section .wp-block-button.zen-btn--primary {
+  background: transparent !important;
+  border: none !important;
+}
+.zen-faq-section .wp-block-button.zen-btn--primary .wp-block-button__link {
+  background: var(--wp--preset--color--primary-gold) !important;
+  border-color: var(--wp--preset--color--primary-gold) !important;
+  color: var(--wp--preset--color--primary-grey) !important;
+}
+
+/* Inactive FAQ category tabs precise styling */
+.zen-faq-section .zen-btn--outline-neutral .wp-block-button__link {
+  background: var(--wp--preset--color--primary-grey) !important;
+  border-color: var(--wp--preset--color--secondary-grey-light) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
+}
+
+/* Force pill gap to exactly 5px, overriding WP's native flex gap */
+:root :where(.zen-faq-section .is-layout-flex),
+.zen-faq-section .wp-block-buttons {
+  gap: 5px !important;
+}
+
+.zen-faq-accordion {
+  border: 1px solid var(--wp--preset--color--secondary-grey-light) !important;
+  border-radius: 23px !important;
+  background: var(--wp--preset--color--primary-grey) !important;
+  margin-bottom: var(--zen-space-16) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
+  overflow: hidden !important;
+}
+
+.zen-faq-accordion summary {
+  list-style: none !important;
+  /* Hide native triangle */
+  padding: 13px 32px !important;
+  font-family: var(--wp--preset--font-family--dm-sans) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.zen-faq-accordion summary::-webkit-details-marker {
+  display: none !important;
+}
+
+/* Custom Plus Icon using pseudo-element fixed width to prevent toggling jitter */
+.zen-faq-accordion summary::after {
+  content: "+";
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--wp--preset--color--primary-beige);
+  margin-left: 16px;
+  display: inline-block !important;
+  width: 24px !important;
+  text-align: center !important;
+}
+
+.zen-faq-accordion[open] summary::after {
+  content: "−";
+  /* Native minus sign */
+}
+
+/* Internal Answer formatting */
+.zen-faq-accordion>*:not(summary) {
+  padding: 0 32px 24px 32px !important;
+  margin: 0 !important;
+  font-size: 16px !important;
+  font-family: var(--wp--preset--font-family--dm-sans) !important;
+  color: var(--wp--preset--color--primary-beige) !important;
+}
+
+/* ==========================================
+   POPUP SHELL
+   ========================================== */
+
+.zen-popup {
+  border-radius: var(--zen-radius-popup-desktop);
+  overflow: hidden;
+}
+
+.zen-popup-backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ==========================================
+   ZENCOINS PRICING & VISUALS
+   ========================================== */
+
+/* Zencoin Styling */
+.zen-coin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--primary-gold);
+  color: var(--wp--preset--color--primary-grey);
+  font-family: var(--wp--preset--font-family--dm-sans);
+  font-weight: 700;
+  font-size: 14px;
+  /* Simulate the inner ring */
+  border: 1px solid var(--wp--preset--color--primary-beige);
+  box-shadow: inset 0 0 0 3px var(--wp--preset--color--primary-gold), inset 0 0 0 4px var(--wp--preset--color--primary-grey);
+}
+
+.zen-coin-icon--large {
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  /* Thicker rings for the header variant */
+  box-shadow: inset 0 0 0 4px var(--wp--preset--color--primary-gold), inset 0 0 0 5px var(--wp--preset--color--primary-grey);
+}
+
+.zen-coins-group {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Force overlap on consecutive coins */
+.zen-coins-group .zen-coin-icon + .zen-coin-icon {
+  margin-left: -12px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Stagger z-index so left-most coins render on top visually naturally like the design */
+.zen-coins-group .zen-coin-icon:nth-child(1) { z-index: 30; }
+.zen-coins-group .zen-coin-icon:nth-child(2) { z-index: 20; }
+.zen-coins-group .zen-coin-icon:nth-child(3) { z-index: 10; }
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .zen-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zen-grid-3,
+  .zen-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .zen-page-padding {
+    padding-left: var(--zen-page-pad-x-mobile);
+    padding-right: var(--zen-page-pad-x-mobile);
+  }
+
+  .zen-section,
+  .zen-section--compact {
+    padding-top: var(--zen-space-120);
+    padding-bottom: var(--zen-space-120);
+  }
+
+  .zen-card {
+    border-radius: var(--zen-radius-card-mobile);
+    padding: 16px;
+  }
+
+  .zen-btn,
+  .wp-element-button,
+  .wp-block-button__link {
+    min-height: var(--zen-btn-height-lg);
+  }
+
+  .zen-popup {
+    border-radius: var(--zen-radius-popup-mobile);
+  }
+}
