@@ -27,6 +27,13 @@ function zenctuary_theme_setup(): void {
  */
 add_action( 'init', 'zenctuary_register_custom_blocks' );
 function zenctuary_register_custom_blocks() {
-	// Register the dynamically compiled Icon Button Block
-	register_block_type( get_template_directory() . '/build/icon-button' );
+	$block_manifests = glob( get_template_directory() . '/build/*/block.json' );
+
+	if ( empty( $block_manifests ) ) {
+		return;
+	}
+
+	foreach ( $block_manifests as $block_manifest ) {
+		register_block_type( dirname( $block_manifest ) );
+	}
 }
