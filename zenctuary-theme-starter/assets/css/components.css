@@ -736,6 +736,12 @@ input[type="checkbox"] {
   }
 
   /* Zencoin Mobile Adjustments */
+  .zen-zencoin-title-group.is-layout-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .zen-coin-icon {
     width: 28px;
     height: 28px;

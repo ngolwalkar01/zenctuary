@@ -13,8 +13,8 @@
         
         <!-- wp:column {"width":"50%"} -->
         <div class="wp-block-column" style="flex-basis:50%">
-            <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center","justifyContent":"left"}} -->
-            <div class="wp-block-group">
+            <!-- wp:group {"className":"zen-zencoin-title-group","layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center","justifyContent":"left"}} -->
+            <div class="wp-block-group zen-zencoin-title-group">
                 <!-- wp:heading {"level":2,"style":{"typography":{"textTransform":"uppercase"},"color":{"text":"var(--wp--preset--color--primary-gold)"}}} -->
                 <h2 class="wp-block-heading has-text-color" style="color:var(--wp--preset--color--primary-gold);text-transform:uppercase">What are Zencoins?</h2>
                 <!-- /wp:heading -->
