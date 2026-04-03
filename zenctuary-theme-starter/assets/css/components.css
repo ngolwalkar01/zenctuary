@@ -532,10 +532,6 @@ input[type="checkbox"] {
   color: var(--wp--preset--color--primary-beige) !important;
 }
 
-.zen-faq-block-group {
-  padding-right: 15%;
-  padding-left: 15%
-}
 
 /* ==========================================
    POPUP SHELL
@@ -639,7 +635,7 @@ input[type="checkbox"] {
   line-height: 0;
 }
 
-.zen-faq-block-group {
+.zen-faq-section .wp-block-group.is-layout-flow {
   padding-right: 15%;
   padding-left: 15%;
 }
@@ -718,7 +714,7 @@ input[type="checkbox"] {
     grid-row: 2;
   }
 
-  .zen-faq-block-group {
+  .zen-faq-section .wp-block-group.is-layout-flow {
     padding-right: 0;
     padding-left: 0;
   }
@@ -757,8 +753,4 @@ input[type="checkbox"] {
     min-width: 100%;
   }
 
-  .zen-faq-block-group {
-    padding-right: 0;
-    padding-left: 0;
-  }
 }
