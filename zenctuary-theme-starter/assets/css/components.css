@@ -175,7 +175,7 @@
 
 .zen-btn--small {
   min-height: var(--zen-btn-height-sm);
-  padding: 8px 24px;
+  padding: 8px 10px 8px 0px;
 }
 
 /* ==========================================
@@ -431,6 +431,10 @@ input[type="checkbox"] {
     width: 100%;
     margin-right: 0;
   }
+}
+
+.zen-faq-section {
+  min-height: var(--zen-faq-height);
 }
 
 /* Perfect shrinking for category tabs in FAQs */
