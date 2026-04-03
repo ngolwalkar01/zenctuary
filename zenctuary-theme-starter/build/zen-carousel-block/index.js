@@ -405,7 +405,15 @@
 			}
 
 			if ( card.mediaType === 'video' && card.videoUrl ) {
-				return el( 'div', { className: 'zen-carousel__card-media' }, el( 'video', { src: card.videoUrl, autoPlay: true, muted: true, loop: true, playsInline: true } ) );
+				return el(
+					'div',
+					{ className: 'zen-carousel__card-media zen-carousel__card-media--video' },
+					el(
+						'div',
+						{ className: 'zen-carousel__video-preview', 'aria-hidden': 'true' },
+						el( 'span', { className: 'zen-carousel__video-preview-icon' }, playIcon() )
+					)
+				);
 			}
 
 			if ( card.backgroundUrl ) {
@@ -691,12 +699,17 @@
 						'div',
 						{ className: 'zen-carousel__track', style: { transform: 'translate3d(-' + ( snapOffsets[ currentSlide ] || 0 ) + 'px, 0, 0)' } },
 						cards.map( function ( card, index ) {
+							const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
 							return el(
 								'div',
 								{ key: index, ref: function ( node ) { slideRefs.current[ index ] = node; }, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
 								el(
 									'article',
-									{ className: 'zen-carousel__card', style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' } },
+									{
+										className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
+										style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
+										'data-video-url': isVideoCard ? card.videoUrl : undefined
+									},
 									renderCardBody( { card: card, attributes: attributes, editable: index === selectedCardIndex, updateCard: function ( patch ) { updateCard( index, patch ); } } )
 								)
 							);
@@ -743,12 +756,17 @@
 					'div',
 					{ className: 'zen-carousel__track' },
 					cards.map( function ( card, index ) {
+						const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
 						return el(
 							'div',
 							{ key: index, className: 'zen-carousel__slide' },
 							el(
 								'article',
-								{ className: 'zen-carousel__card', style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' } },
+								{
+									className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
+									style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
+									'data-video-url': isVideoCard ? card.videoUrl : undefined
+								},
 								renderCardBody( { card: card, attributes: attributes, editable: false, updateCard: function () {} } )
 							)
 						);

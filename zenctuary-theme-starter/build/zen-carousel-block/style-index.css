@@ -140,6 +140,39 @@
   object-fit: cover;
 }
 
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__card--video {
+  cursor: pointer;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at center, rgba(216, 179, 84, 0.18), rgba(0, 0, 0, 0) 48%),
+    linear-gradient(160deg, rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.45));
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview-icon {
+  width: 74px;
+  height: 74px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #f6f2ea;
+  border: 1px solid rgba(246, 242, 234, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__video-preview-icon svg {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+}
+
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__card-overlay {
   z-index: 1;
 }
@@ -318,6 +351,58 @@
   display: flex;
   flex: 1;
   align-items: center;
+}
+
+.zen-carousel-modal-open {
+  overflow: hidden;
+}
+
+.zen-carousel__video-modal[hidden] {
+  display: none;
+}
+
+.zen-carousel__video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.82);
+}
+
+.zen-carousel__video-modal-dialog {
+  position: relative;
+  width: min(100%, 960px);
+  max-height: calc(100vh - 48px);
+  outline: none;
+}
+
+.zen-carousel__video-modal-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zen-carousel__video-modal-video {
+  width: 100%;
+  max-height: calc(100vh - 48px);
+  display: block;
+  border-radius: 14px;
+  background: #000;
 }
 
 .wp-block-zenctuary-zen-carousel-block.is-editor-preview .zen-carousel__slide {
