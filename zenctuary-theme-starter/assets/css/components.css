@@ -437,6 +437,13 @@ input[type="checkbox"] {
   min-height: var(--zen-faq-height);
 }
 
+.zen-faq-section .wp-block-media-text.is-vertically-aligned-center>.wp-block-media-text__content,
+.zen-faq-section .wp-block-media-text.is-vertically-aligned-center>.wp-block-media-text__media,
+.zen-faq-section .wp-block-media-text>.wp-block-media-text__content,
+.zen-faq-section .wp-block-media-text>.wp-block-media-text__media {
+  align-self: self-start;
+}
+
 /* Perfect shrinking for category tabs in FAQs */
 .zen-faq-section .wp-block-button__link {
   font-size: 13px !important;
