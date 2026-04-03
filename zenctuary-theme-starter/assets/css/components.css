@@ -16,6 +16,8 @@
 .zen-section {
   padding-top: var(--zen-space-180);
   padding-bottom: var(--zen-space-180);
+  padding-top: var(--zen-space-120);
+  padding-bottom: var(--zen-space-120);
 }
 
 .zen-section--compact {
@@ -436,7 +438,8 @@ input[type="checkbox"] {
   font-size: 13px !important;
   padding: 6px 20px !important;
   min-height: auto !important;
-  border-radius: 24px !important; /* Forces the pill shape! */
+  border-radius: 24px !important;
+  /* Forces the pill shape! */
   font-weight: 600 !important;
 }
 
@@ -445,6 +448,7 @@ input[type="checkbox"] {
   background: transparent !important;
   border: none !important;
 }
+
 .zen-faq-section .wp-block-button.zen-btn--primary .wp-block-button__link {
   background: var(--wp--preset--color--primary-gold) !important;
   border-color: var(--wp--preset--color--primary-gold) !important;
@@ -566,16 +570,24 @@ input[type="checkbox"] {
 }
 
 /* Force overlap on consecutive coins */
-.zen-coins-group .zen-coin-icon + .zen-coin-icon {
+.zen-coins-group .zen-coin-icon+.zen-coin-icon {
   margin-left: -12px;
   position: relative;
   z-index: 10;
 }
 
 /* Stagger z-index so left-most coins render on top visually naturally like the design */
-.zen-coins-group .zen-coin-icon:nth-child(1) { z-index: 30; }
-.zen-coins-group .zen-coin-icon:nth-child(2) { z-index: 20; }
-.zen-coins-group .zen-coin-icon:nth-child(3) { z-index: 10; }
+.zen-coins-group .zen-coin-icon:nth-child(1) {
+  z-index: 30;
+}
+
+.zen-coins-group .zen-coin-icon:nth-child(2) {
+  z-index: 20;
+}
+
+.zen-coins-group .zen-coin-icon:nth-child(3) {
+  z-index: 10;
+}
 
 /* ==========================================
    FEATURES GRID (AUTO-NUMBERING)
