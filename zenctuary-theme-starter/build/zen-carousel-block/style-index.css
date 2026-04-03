@@ -86,7 +86,6 @@
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__viewport {
   overflow: hidden;
   position: relative;
-  min-height: var(--zen-carousel-height);
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__track {
