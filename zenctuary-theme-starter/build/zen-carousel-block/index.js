@@ -17,6 +17,7 @@
 	const SelectControl = components.SelectControl;
 	const ToggleControl = components.ToggleControl;
 	const BaseControl = components.BaseControl;
+	const ColorPalette = components.ColorPalette;
 	const UnitControl = components.__experimentalUnitControl || components.UnitControl || TextControl;
 	const __ = i18n.__;
 
@@ -93,6 +94,10 @@
 			sectionMargin: { type: 'object', default: { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
 			carouselWidth: { type: 'number', default: 1200 },
 			carouselHeight: { type: 'number', default: 971 },
+			carouselBorderWidth: { type: 'number', default: 0 },
+			carouselBorderColor: { type: 'string', default: '#ffffff' },
+			carouselBorderStyle: { type: 'string', default: 'solid' },
+			carouselBorderRadius: { type: 'number', default: 0 },
 			cardWidth: { type: 'number', default: 370 },
 			cardHeight: { type: 'number', default: 483 },
 			slideGap: { type: 'number', default: 24 },
@@ -186,6 +191,10 @@
 				'--zen-carousel-card-height': attributes.cardHeight + 'px',
 				'--zen-carousel-gap': attributes.slideGap + 'px',
 				'--zen-carousel-speed': attributes.slideSpeed + 'ms',
+				borderWidth: attributes.carouselBorderWidth + 'px',
+				borderColor: attributes.carouselBorderColor,
+				borderStyle: attributes.carouselBorderStyle,
+				borderRadius: attributes.carouselBorderRadius + 'px',
 				'--zen-visible-desktop': String( attributes.visibleDesktop ),
 				'--zen-visible-tablet': String( attributes.visibleTablet ),
 				'--zen-visible-mobile': String( attributes.visibleMobile ),
@@ -499,6 +508,26 @@
 					{ title: __( 'Carousel Layout', 'zenctuary' ), initialOpen: true },
 					el( RangeControl, { label: __( 'Carousel Width (px)', 'zenctuary' ), value: attributes.carouselWidth, onChange: function ( value ) { setAttributes( { carouselWidth: value } ); }, min: 320, max: 1800 } ),
 					el( RangeControl, { label: __( 'Carousel Height (px)', 'zenctuary' ), value: attributes.carouselHeight, onChange: function ( value ) { setAttributes( { carouselHeight: value } ); }, min: 300, max: 1400 } ),
+					el( RangeControl, { label: __( 'Border Width', 'zenctuary' ), value: attributes.carouselBorderWidth, onChange: function ( value ) { setAttributes( { carouselBorderWidth: value } ); }, min: 0, max: 20 } ),
+					el(
+						BaseControl,
+						{ label: __( 'Border Color', 'zenctuary' ) },
+						el( ColorPalette, {
+							value: attributes.carouselBorderColor,
+							onChange: function ( value ) {
+								setAttributes( { carouselBorderColor: value || '#ffffff' } );
+							},
+							colors: [
+								{ name: 'White', color: '#ffffff' },
+								{ name: 'Gold', color: '#d8b354' },
+								{ name: 'Beige', color: '#f6f2ea' },
+								{ name: 'Charcoal', color: '#3f3e3e' },
+								{ name: 'Gray', color: '#545454' }
+							]
+						} )
+					),
+					el( SelectControl, { label: __( 'Border Style', 'zenctuary' ), value: attributes.carouselBorderStyle, options: [ { label: __( 'Solid', 'zenctuary' ), value: 'solid' }, { label: __( 'Dashed', 'zenctuary' ), value: 'dashed' }, { label: __( 'Dotted', 'zenctuary' ), value: 'dotted' }, { label: __( 'None', 'zenctuary' ), value: 'none' } ], onChange: function ( value ) { setAttributes( { carouselBorderStyle: value } ); } } ),
+					el( RangeControl, { label: __( 'Border Radius', 'zenctuary' ), value: attributes.carouselBorderRadius, onChange: function ( value ) { setAttributes( { carouselBorderRadius: value } ); }, min: 0, max: 100 } ),
 					el( RangeControl, { label: __( 'Card Width (px)', 'zenctuary' ), value: attributes.cardWidth, onChange: function ( value ) { setAttributes( { cardWidth: value } ); }, min: 220, max: 600 } ),
 					el( RangeControl, { label: __( 'Card Height (px)', 'zenctuary' ), value: attributes.cardHeight, onChange: function ( value ) { setAttributes( { cardHeight: value } ); }, min: 240, max: 800 } ),
 					el( RangeControl, { label: __( 'Gap Between Cards', 'zenctuary' ), value: attributes.slideGap, onChange: function ( value ) { setAttributes( { slideGap: value } ); }, min: 0, max: 80 } ),
@@ -677,7 +706,13 @@
 		supports: {
 			html: false,
 			anchor: true,
-			align: [ 'wide', 'full' ]
+			align: [ 'wide', 'full' ],
+			border: {
+				color: true,
+				radius: true,
+				style: true,
+				width: true
+			}
 		},
 		edit: Edit,
 		save: Save
