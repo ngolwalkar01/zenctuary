@@ -250,7 +250,7 @@
         "bottom": "0",
         "left": "clamp(32px, 8.3vw, 120px)"
       },
-      "blockGap": "clamp(120px, 12.5vw, 180px)"
+      "blockGap": "24px"
     },
     "elements": {
       "heading": {
