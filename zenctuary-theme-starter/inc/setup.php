@@ -29,4 +29,5 @@ add_action( 'init', 'zenctuary_register_custom_blocks' );
 function zenctuary_register_custom_blocks() {
 	// Register the dynamically compiled Icon Button Block
 	register_block_type( get_template_directory() . '/build/icon-button' );
+	register_block_type( get_template_directory() . '/build/contact-map' );
 }
