@@ -223,7 +223,7 @@
   justify-content: center;
   gap: 10px;
   text-decoration: none;
-  border: 1px solid var(--zen-button-border-color, #d8b355);
+  border: var(--zen-button-border-width, 1px) solid var(--zen-button-border-color, #d8b355);
   border-radius: var(--zen-button-radius, 999px);
   color: var(--zen-button-text-color, #f6f2ea);
   background: var(--zen-button-bg, rgba(63, 62, 62, 0.85));

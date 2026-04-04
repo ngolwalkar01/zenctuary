@@ -47,6 +47,7 @@
     "buttonTextColor": { "type": "string", "default": "#f6f2ea" },
     "buttonBackgroundColor": { "type": "string", "default": "rgba(63, 62, 62, 0.85)" },
     "buttonBorderColor": { "type": "string", "default": "#d8b355" },
+    "buttonBorderWidth": { "type": "number", "default": 1 },
     "buttonBorderRadius": { "type": "string", "default": "999px" },
     "buttonPadding": { "type": "object", "default": { "top": "12px", "right": "20px", "bottom": "12px", "left": "20px" } },
     "buttonMargin": { "type": "object", "default": { "top": "16px", "right": "0px", "bottom": "0px", "left": "0px" } },
