@@ -162,6 +162,87 @@
 		return value.slice( 0, limit ).trimEnd() + '...';
 	}
 
+	function normalizeRichTextLineBreaks( value ) {
+		if ( value === null || value === undefined ) {
+			return '';
+		}
+
+		return String( value ).replace( /\r\n|\r|\n/g, '<br>' );
+	}
+
+	function clampLineBreakRichText( value, limit ) {
+		const normalizedValue = normalizeRichTextLineBreaks( value );
+
+		if ( ! normalizedValue || ! limit ) {
+			return normalizedValue;
+		}
+
+		const parts = normalizedValue.split( /(<br\s*\/?>)/i );
+		const nextParts = [];
+		let remaining = limit;
+		let truncated = false;
+
+		parts.forEach( function ( part ) {
+			if ( ! part ) {
+				return;
+			}
+
+			if ( /<br\s*\/?>/i.test( part ) ) {
+				if ( nextParts.length && remaining > 0 ) {
+					nextParts.push( '<br>' );
+				}
+				return;
+			}
+
+			if ( remaining <= 0 ) {
+				if ( part.trim() ) {
+					truncated = true;
+				}
+				return;
+			}
+
+			if ( part.length <= remaining ) {
+				nextParts.push( part );
+				remaining -= part.length;
+				return;
+			}
+
+			nextParts.push( part.slice( 0, remaining ).trimEnd() );
+			remaining = 0;
+			truncated = true;
+		} );
+
+		if ( truncated ) {
+			nextParts.push( '...' );
+		}
+
+		return nextParts.join( '' );
+	}
+
+	function getRichTextDisplayValue( value, limit ) {
+		const normalizedValue = normalizeRichTextLineBreaks( value );
+
+		if ( ! limit ) {
+			return normalizedValue;
+		}
+
+		const containsHtmlMarkup = /<(?!br\s*\/?)[^>]+>/i.test( normalizedValue );
+
+		if ( containsHtmlMarkup ) {
+			return normalizedValue;
+		}
+
+		return clampLineBreakRichText( normalizedValue, limit );
+	}
+
+	function renderRichTextContent( tagName, className, value, limit ) {
+		return el( RichText.Content, {
+			tagName: tagName,
+			className: className,
+			value: getRichTextDisplayValue( value, limit )
+		} );
+	}
+
 	function getSpacingStyle( spacing, prefix ) {
 		const style = {};
 		const value = spacing || {};
@@ -435,8 +516,6 @@
 		const editable = params.editable;
 		const updateCard = params.updateCard;
 		const cardType = attributes.cardType;
-		const title = clampText( card.title, card.titleLimit );
-		const content = clampText( card.content, card.contentLimit );
 		const course = clampText( card.courseName, card.courseLimit );
 		const overlayStyle = { background: card.overlayColor, opacity: card.overlayOpacity };
 
@@ -489,7 +568,7 @@
 						{ className: 'zen-carousel__testimonial-body' },
 						editable
 							? el( RichText, { tagName: 'p', className: 'zen-carousel__content', value: card.content, onChange: function ( nextValue ) { updateCard( { content: nextValue } ); }, placeholder: __( 'Write testimonial text...', 'zenctuary' ) } )
-							: el( 'p', { className: 'zen-carousel__content' }, content )
+							: renderRichTextContent( 'p', 'zen-carousel__content', card.content, card.contentLimit )
 					),
 					editable
 						? el( RichText, { tagName: 'p', className: 'zen-carousel__client', value: card.clientName, onChange: function ( nextValue ) { updateCard( { clientName: nextValue } ); }, placeholder: __( 'Client name', 'zenctuary' ) } )
@@ -511,7 +590,7 @@
 				{ className: 'zen-carousel__card-inner', style: innerStyle },
 				editable
 					? el( RichText, { tagName: 'h3', className: 'zen-carousel__title', value: card.title, onChange: function ( nextValue ) { updateCard( { title: nextValue } ); }, placeholder: __( 'Card title', 'zenctuary' ) } )
-					: el( 'h3', { className: 'zen-carousel__title' }, title ),
+					: renderRichTextContent( 'h3', 'zen-carousel__title', card.title, card.titleLimit ),
 				el(
 					'div',
 					{ className: 'zen-carousel__footer' },
@@ -521,7 +600,7 @@
 								null,
 								editable
 									? el( RichText, { tagName: 'p', className: 'zen-carousel__content', value: card.content, onChange: function ( nextValue ) { updateCard( { content: nextValue } ); }, placeholder: __( 'Write supporting copy...', 'zenctuary' ) } )
-									: el( 'p', { className: 'zen-carousel__content' }, content ),
+									: renderRichTextContent( 'p', 'zen-carousel__content', card.content, card.contentLimit ),
 								el( 'div', { className: 'zen-carousel__dots', 'aria-hidden': 'true' }, el( 'span', null ), el( 'span', null ), el( 'span', null ) )
 						  )
 						: editable
