@@ -359,6 +359,14 @@
 		);
 	}
 
+	function navigationIcon( direction ) {
+		return el(
+			'span',
+			{ className: 'zen-carousel__arrow-icon', 'aria-hidden': 'true' },
+			direction === 'prev' ? '<' : '>'
+		);
+	}
+
 	function playIcon() {
 		return el(
 			'svg',
@@ -838,8 +846,8 @@
 					el(
 						'div',
 						{ className: 'zen-carousel__nav' },
-						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev' + ( currentSlide > 0 ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.max( 0, currentSlide - 1 ) ); }, disabled: currentSlide <= 0 }, arrowIcon( 'prev' ) ),
-						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next' + ( currentSlide < maxIndex ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.min( maxIndex, currentSlide + 1 ) ); }, disabled: currentSlide >= maxIndex }, arrowIcon( 'next' ) )
+						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev' + ( currentSlide > 0 ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.max( 0, currentSlide - 1 ) ); }, disabled: currentSlide <= 0 }, navigationIcon( 'prev' ) ),
+						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next' + ( currentSlide < maxIndex ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.min( maxIndex, currentSlide + 1 ) ); }, disabled: currentSlide >= maxIndex }, navigationIcon( 'next' ) )
 					)
 				),
 				el(
@@ -895,8 +903,8 @@
 				el(
 					'div',
 					{ className: 'zen-carousel__nav' },
-					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev', 'aria-label': __( 'Previous slide', 'zenctuary' ) }, arrowIcon( 'prev' ) ),
-					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next', 'aria-label': __( 'Next slide', 'zenctuary' ) }, arrowIcon( 'next' ) )
+					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev', 'aria-label': __( 'Previous slide', 'zenctuary' ) }, navigationIcon( 'prev' ) ),
+					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next', 'aria-label': __( 'Next slide', 'zenctuary' ) }, navigationIcon( 'next' ) )
 				)
 			),
 			el(
