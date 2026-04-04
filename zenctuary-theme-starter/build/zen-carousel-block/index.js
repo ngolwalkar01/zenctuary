@@ -340,18 +340,18 @@
 	}
 
 	function arrowIcon( direction ) {
-		const rotate = direction === 'prev' ? 'rotate(180 8 8)' : undefined;
+		const rotate = direction === 'prev' ? 'rotate(180 12 12)' : undefined;
 
 		return el(
 			'svg',
-			{ viewBox: '0 0 16 16', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' },
+			{ viewBox: '0 0 24 24', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' },
 			el(
 				'g',
 				rotate ? { transform: rotate } : {},
 				el( 'path', {
-					d: 'M4.5 8H11.5M11.5 8L8.5 5M11.5 8L8.5 11',
+					d: 'M3.5 12H18.5M18.5 12L13.5 7M18.5 12L13.5 17',
 					stroke: 'currentColor',
-					'stroke-width': '1.5',
+					'stroke-width': '1.75',
 					'stroke-linecap': 'round',
 					'stroke-linejoin': 'round'
 				} )

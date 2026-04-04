@@ -243,8 +243,16 @@
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__button-icon {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 16px;
   height: 16px;
+  flex: 0 0 16px;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__button-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__button-icon--top,
