@@ -29,6 +29,32 @@
   --zen-play-button-bg: rgba(0, 0, 0, 0.45);
   width: min(100%, var(--zen-carousel-width));
   color: var(--wp--preset--color--primary-beige, #f6f2ea);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__background-image {
+  position: absolute;
+  inset: -24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.05);
+  will-change: transform, filter;
+}
+
+.wp-block-zenctuary-zen-carousel-block .zen-carousel__content {
+  position: relative;
+  z-index: 1;
 }
 
 .wp-block-zenctuary-zen-carousel-block .zen-carousel__header {

@@ -95,6 +95,10 @@
 			headerMargin: { type: 'object', default: { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
 			sectionPadding: { type: 'object', default: { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
 			sectionMargin: { type: 'object', default: { top: '0px', right: '0px', bottom: '0px', left: '0px' } },
+			sectionBackgroundType: { type: 'string', default: 'color' },
+			sectionBackgroundImageUrl: { type: 'string', default: '' },
+			sectionBackgroundColor: { type: 'string', default: '#3f3e3e' },
+			sectionBackgroundBlur: { type: 'number', default: 0 },
 			carouselWidth: { type: 'number', default: 1200 },
 			carouselHeight: { type: 'number', default: 971 },
 			carouselBorderWidth: { type: 'number', default: 0 },
@@ -332,10 +336,29 @@
 				'--zen-button-radius': attributes.buttonBorderRadius,
 				'--zen-testimonial-text-color': attributes.testimonialTextColor,
 				'--zen-play-button-color': attributes.playButtonColor,
-				'--zen-play-button-bg': attributes.playButtonBackground
+				'--zen-play-button-bg': attributes.playButtonBackground,
+				backgroundColor: attributes.sectionBackgroundColor
 			},
 			getSpacingStyle( attributes.sectionPadding, 'padding' ),
 			getSpacingStyle( attributes.sectionMargin, 'margin' )
+		);
+	}
+
+	function getSectionBackgroundLayer( attributes ) {
+		if ( attributes.sectionBackgroundType !== 'image' || ! attributes.sectionBackgroundImageUrl ) {
+			return null;
+		}
+
+		return el(
+			'div',
+			{ className: 'zen-carousel__background', 'aria-hidden': 'true' },
+			el( 'div', {
+				className: 'zen-carousel__background-image',
+				style: {
+					backgroundImage: 'linear-gradient(' + attributes.sectionBackgroundColor + ', ' + attributes.sectionBackgroundColor + '), url("' + attributes.sectionBackgroundImageUrl + '")',
+					filter: 'blur(' + ( attributes.sectionBackgroundBlur || 0 ) + 'px)'
+				}
+			} )
 		);
 	}
 
@@ -759,6 +782,28 @@
 					el( RangeControl, { label: __( 'Visible Cards Desktop', 'zenctuary' ), value: attributes.visibleDesktop, onChange: function ( value ) { setAttributes( { visibleDesktop: value } ); }, min: 1, max: 4, step: 0.1 } ),
 					el( RangeControl, { label: __( 'Visible Cards Tablet', 'zenctuary' ), value: attributes.visibleTablet, onChange: function ( value ) { setAttributes( { visibleTablet: value } ); }, min: 1, max: 3, step: 0.1 } ),
 					el( RangeControl, { label: __( 'Visible Cards Mobile', 'zenctuary' ), value: attributes.visibleMobile, onChange: function ( value ) { setAttributes( { visibleMobile: value } ); }, min: 1, max: 2, step: 0.1 } ),
+					el( SelectControl, { label: __( 'Background Type', 'zenctuary' ), value: attributes.sectionBackgroundType, options: [ { label: __( 'Solid Color', 'zenctuary' ), value: 'color' }, { label: __( 'Image', 'zenctuary' ), value: 'image' } ], onChange: function ( value ) { setAttributes( { sectionBackgroundType: value } ); } } ),
+					attributes.sectionBackgroundType === 'image' ? renderMediaControl( { label: __( 'Background Image', 'zenctuary' ), type: 'image', allowedTypes: [ 'image' ], url: attributes.sectionBackgroundImageUrl, buttonLabel: __( 'Choose Background Image', 'zenctuary' ), onSelect: function ( media ) { setAttributes( { sectionBackgroundImageUrl: media.url } ); }, onRemove: function () { setAttributes( { sectionBackgroundImageUrl: '' } ); } } ) : null,
+					el(
+						BaseControl,
+						{ label: __( 'Background Color', 'zenctuary' ) },
+						el( ColorPalette, {
+							value: attributes.sectionBackgroundColor,
+							onChange: function ( value ) {
+								setAttributes( { sectionBackgroundColor: value || '#3f3e3e' } );
+							},
+							colors: [
+								{ name: 'Transparent', color: 'rgba(0,0,0,0)' },
+								{ name: 'White', color: '#ffffff' },
+								{ name: 'Gold', color: '#d8b354' },
+								{ name: 'Beige', color: '#f6f2ea' },
+								{ name: 'Charcoal', color: '#3f3e3e' },
+								{ name: 'Black', color: '#000000' }
+							]
+						} ),
+						el( TextControl, { label: __( 'Custom Color', 'zenctuary' ), value: attributes.sectionBackgroundColor, onChange: function ( value ) { setAttributes( { sectionBackgroundColor: value || '#3f3e3e' } ); }, help: __( 'Supports hex, rgb, or rgba values for solid backgrounds or image tinting.', 'zenctuary' ) } )
+					),
+					attributes.sectionBackgroundType === 'image' && attributes.sectionBackgroundImageUrl ? el( RangeControl, { label: __( 'Background Blur', 'zenctuary' ), value: attributes.sectionBackgroundBlur, onChange: function ( value ) { setAttributes( { sectionBackgroundBlur: value } ); }, min: 0, max: 30 } ) : null,
 					renderFourSideControls( __( 'Section Padding', 'zenctuary' ), attributes.sectionPadding, function ( value ) { setAttributes( { sectionPadding: value } ); } ),
 					renderFourSideControls( __( 'Section Margin', 'zenctuary' ), attributes.sectionMargin, function ( value ) { setAttributes( { sectionMargin: value } ); } )
 				),
@@ -839,39 +884,44 @@
 			el(
 				'section',
 				blockProps,
+				getSectionBackgroundLayer( attributes ),
 				el(
 					'div',
-					{ className: 'zen-carousel__header', style: headerStyle },
-					el( RichText, { tagName: 'h2', className: 'zen-carousel__heading', value: attributes.headerText, onChange: function ( value ) { setAttributes( { headerText: value } ); }, placeholder: __( 'Add a heading...', 'zenctuary' ) } ),
+					{ className: 'zen-carousel__content' },
 					el(
 						'div',
-						{ className: 'zen-carousel__nav' },
-						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev' + ( currentSlide > 0 ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.max( 0, currentSlide - 1 ) ); }, disabled: currentSlide <= 0 }, navigationIcon( 'prev' ) ),
-						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next' + ( currentSlide < maxIndex ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.min( maxIndex, currentSlide + 1 ) ); }, disabled: currentSlide >= maxIndex }, navigationIcon( 'next' ) )
-					)
-				),
-				el(
-					'div',
-					{ className: 'zen-carousel__viewport', ref: viewportRef },
+						{ className: 'zen-carousel__header', style: headerStyle },
+						el( RichText, { tagName: 'h2', className: 'zen-carousel__heading', value: attributes.headerText, onChange: function ( value ) { setAttributes( { headerText: value } ); }, placeholder: __( 'Add a heading...', 'zenctuary' ) } ),
+						el(
+							'div',
+							{ className: 'zen-carousel__nav' },
+							el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev' + ( currentSlide > 0 ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.max( 0, currentSlide - 1 ) ); }, disabled: currentSlide <= 0 }, navigationIcon( 'prev' ) ),
+							el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next' + ( currentSlide < maxIndex ? ' is-active' : '' ), onClick: function () { setCurrentSlide( Math.min( maxIndex, currentSlide + 1 ) ); }, disabled: currentSlide >= maxIndex }, navigationIcon( 'next' ) )
+						)
+					),
 					el(
 						'div',
-						{ className: 'zen-carousel__track', style: { transform: 'translate3d(-' + ( snapOffsets[ currentSlide ] || 0 ) + 'px, 0, 0)' } },
-						cards.map( function ( card, index ) {
-							const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
-							return el(
-								'div',
-								{ key: index, ref: function ( node ) { slideRefs.current[ index ] = node; }, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
-								el(
-									'article',
-									{
-										className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
-										style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
-										'data-video-url': isVideoCard ? card.videoUrl : undefined
-									},
-									renderCardBody( { card: card, attributes: attributes, editable: index === selectedCardIndex, updateCard: function ( patch ) { updateCard( index, patch ); } } )
-								)
-							);
-						} )
+						{ className: 'zen-carousel__viewport', ref: viewportRef },
+						el(
+							'div',
+							{ className: 'zen-carousel__track', style: { transform: 'translate3d(-' + ( snapOffsets[ currentSlide ] || 0 ) + 'px, 0, 0)' } },
+							cards.map( function ( card, index ) {
+								const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
+								return el(
+									'div',
+									{ key: index, ref: function ( node ) { slideRefs.current[ index ] = node; }, className: 'zen-carousel__slide' + ( index === selectedCardIndex ? ' is-selected' : '' ), onClick: function () { setSelectedCardIndex( index ); } },
+									el(
+										'article',
+										{
+											className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
+											style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
+											'data-video-url': isVideoCard ? card.videoUrl : undefined
+										},
+										renderCardBody( { card: card, attributes: attributes, editable: index === selectedCardIndex, updateCard: function ( patch ) { updateCard( index, patch ); } } )
+									)
+								);
+							} )
+						)
 					)
 				)
 			)
@@ -896,39 +946,44 @@
 		return el(
 			'section',
 			blockProps,
+			getSectionBackgroundLayer( attributes ),
 			el(
 				'div',
-				{ className: 'zen-carousel__header', style: headerStyle },
-				el( RichText.Content, { tagName: 'h2', className: 'zen-carousel__heading', value: attributes.headerText } ),
+				{ className: 'zen-carousel__content' },
 				el(
 					'div',
-					{ className: 'zen-carousel__nav' },
-					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev', 'aria-label': __( 'Previous slide', 'zenctuary' ) }, navigationIcon( 'prev' ) ),
-					el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next', 'aria-label': __( 'Next slide', 'zenctuary' ) }, navigationIcon( 'next' ) )
-				)
-			),
-			el(
-				'div',
-				{ className: 'zen-carousel__viewport' },
+					{ className: 'zen-carousel__header', style: headerStyle },
+					el( RichText.Content, { tagName: 'h2', className: 'zen-carousel__heading', value: attributes.headerText } ),
+					el(
+						'div',
+						{ className: 'zen-carousel__nav' },
+						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--prev', 'aria-label': __( 'Previous slide', 'zenctuary' ) }, navigationIcon( 'prev' ) ),
+						el( 'button', { type: 'button', className: 'zen-carousel__arrow zen-carousel__arrow--next', 'aria-label': __( 'Next slide', 'zenctuary' ) }, navigationIcon( 'next' ) )
+					)
+				),
 				el(
 					'div',
-					{ className: 'zen-carousel__track' },
-					cards.map( function ( card, index ) {
-						const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
-						return el(
-							'div',
-							{ key: index, className: 'zen-carousel__slide' },
-							el(
-								'article',
-								{
-									className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
-									style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
-									'data-video-url': isVideoCard ? card.videoUrl : undefined
-								},
-								renderCardBody( { card: card, attributes: attributes, editable: false, updateCard: function () {} } )
-							)
-						);
-					} )
+					{ className: 'zen-carousel__viewport' },
+					el(
+						'div',
+						{ className: 'zen-carousel__track' },
+						cards.map( function ( card, index ) {
+							const isVideoCard = card.mediaType === 'video' && !! card.videoUrl;
+							return el(
+								'div',
+								{ key: index, className: 'zen-carousel__slide' },
+								el(
+									'article',
+									{
+										className: 'zen-carousel__card' + ( isVideoCard ? ' zen-carousel__card--video' : '' ),
+										style: { background: card.backgroundColor, height: attributes.cardHeight + 'px' },
+										'data-video-url': isVideoCard ? card.videoUrl : undefined
+									},
+									renderCardBody( { card: card, attributes: attributes, editable: false, updateCard: function () {} } )
+								)
+							);
+						} )
+					)
 				)
 			)
 		);
