@@ -3,16 +3,16 @@ import { useBlockProps, RichText, MediaPlaceholder, InspectorControls } from '@w
 import { PanelBody, TextControl, Button } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
-    const { mapEmbedUrl, imageUrl, imageAlt, schedule, address, email, phone } = attributes;
+    const { mapEmbedUrl, imageUrl, imageAlt, logoUrl, logoAlt, schedule, address, email, phone } = attributes;
 
     const blockProps = useBlockProps();
 
     const onSelectImage = (media) => {
-        setAttributes({
-            imageUrl: media.url,
-            imageId: media.id,
-            imageAlt: media.alt
-        });
+        setAttributes({ imageUrl: media.url, imageId: media.id, imageAlt: media.alt });
+    };
+
+    const onSelectLogo = (media) => {
+        setAttributes({ logoUrl: media.url, logoId: media.id, logoAlt: media.alt });
     };
 
     return (
@@ -23,17 +23,17 @@ export default function Edit({ attributes, setAttributes }) {
                         label={__('Google Maps Embed src URL', 'zenctuary')}
                         value={mapEmbedUrl}
                         onChange={(value) => setAttributes({ mapEmbedUrl: value })}
-                        help={__('Paste the URL found inside the src="" attribute of your Google Maps Embed code.', 'zenctuary')}
+                        help={__('Paste the URL from inside the src="" attribute of your Google Maps Embed code.', 'zenctuary')}
                     />
                 </PanelBody>
             </InspectorControls>
 
             <div style={{ backgroundColor: '#2a2a2a', padding: '40px', borderRadius: '16px', display: 'flex', gap: '32px', flexDirection: 'column' }}>
-                
-                <h2 style={{ color: '#fff', margin: 0 }}>Contact Map configuration</h2>
+
+                <h2 style={{ color: '#fff', margin: 0 }}>Contact Map Configuration</h2>
+
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                    
-                    {/* Map config side */}
+                    {/* Map */}
                     <div style={{ background: '#333', padding: '20px', borderRadius: '8px' }}>
                         <h4 style={{ color: '#aaa', marginTop: 0 }}>Left Side (Map Embed)</h4>
                         <TextControl
@@ -48,7 +48,7 @@ export default function Edit({ attributes, setAttributes }) {
                         )}
                     </div>
 
-                    {/* Image config side */}
+                    {/* Image */}
                     <div style={{ background: '#333', padding: '20px', borderRadius: '8px' }}>
                         <h4 style={{ color: '#aaa', marginTop: 0 }}>Right Side (Statue Image)</h4>
                         {imageUrl ? (
@@ -67,15 +67,35 @@ export default function Edit({ attributes, setAttributes }) {
                             />
                         )}
                     </div>
-
                 </div>
 
-                {/* Overlap Info Config */}
+                {/* Contact Info Box */}
                 <div style={{ background: '#333', padding: '30px', borderRadius: '8px' }}>
-                    <h4 style={{ color: '#aaa', marginTop: 0 }}>Contact Details (Center Box)</h4>
+                    <h4 style={{ color: '#aaa', marginTop: 0 }}>Contact Details (Center Overlay Box)</h4>
+
+                    {/* Logo Upload */}
+                    <div style={{ marginBottom: '24px' }}>
+                        <label style={{ display: 'block', color: '#888', marginBottom: '8px' }}>Logo (replaces "Zenctuary" text)</label>
+                        {logoUrl ? (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                <img src={logoUrl} alt={logoAlt} style={{ maxHeight: '60px', maxWidth: '200px', objectFit: 'contain', background: '#111', padding: '8px', borderRadius: '4px' }} />
+                                <Button isSecondary isDestructive onClick={() => setAttributes({ logoUrl: null, logoId: null })}>
+                                    Remove Logo
+                                </Button>
+                            </div>
+                        ) : (
+                            <MediaPlaceholder
+                                onSelect={onSelectLogo}
+                                allowedTypes={['image']}
+                                multiple={false}
+                                labels={{ title: 'Upload Logo' }}
+                            />
+                        )}
+                    </div>
+
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         <div>
-                            <label style={{ display: 'block', color: '#888', marginBottom: '4px' }}>Schedule/Hours</label>
+                            <label style={{ display: 'block', color: '#888', marginBottom: '4px' }}>Schedule / Hours</label>
                             <RichText
                                 tagName="div"
                                 value={schedule}
@@ -84,7 +104,7 @@ export default function Edit({ attributes, setAttributes }) {
                             />
                         </div>
                         <div>
-                            <label style={{ display: 'block', color: '#888', marginBottom: '4px' }}>Address Info</label>
+                            <label style={{ display: 'block', color: '#888', marginBottom: '4px' }}>Address</label>
                             <RichText
                                 tagName="div"
                                 value={address}

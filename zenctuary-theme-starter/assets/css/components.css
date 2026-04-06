@@ -704,6 +704,20 @@ input[type="checkbox"] {
   width: var(--zen-image-block-width);
 }
 
+.zen-contact-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.zen-contact-logo img {
+  max-height: 64px;
+  max-width: 220px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 /* ==========================================
    RESPONSIVE
    ========================================== */

@@ -22,6 +22,16 @@
       "type": "string",
       "default": "Buddha Statue"
     },
+    "logoUrl": {
+      "type": "string"
+    },
+    "logoId": {
+      "type": "number"
+    },
+    "logoAlt": {
+      "type": "string",
+      "default": "Zenctuary Logo"
+    },
     "schedule": {
       "type": "string",
       "default": "MO-FR: 09:00-22:00"
