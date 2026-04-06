@@ -187,9 +187,8 @@
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__description {
   max-width: none;
   font-size: 16px;
-  font-weight: 700;
   line-height: 1.55;
-  color: #fff;
+  color: rgba(246, 242, 234, 0.7);
 }
 
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__description p,
