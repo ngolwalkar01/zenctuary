@@ -124,7 +124,7 @@
 
 		if ( prices.price && prices.currency_symbol ) {
 			const rawPrice = Number( prices.price ) / Math.pow( 10, prices.currency_minor_unit || 2 );
-			return prices.currency_symbol + rawPrice.toFixed( prices.currency_minor_unit || 2 );
+			return rawPrice.toFixed( prices.currency_minor_unit || 2 ) + prices.currency_symbol;
 		}
 
 		if ( prices.price_html ) {
@@ -251,7 +251,7 @@
 				el(
 					'div',
 					{ className: 'zen-best-sellers__pricing' },
-					el( 'h4', { className: 'zen-best-sellers__price' }, product.price || '\u00a3' + '0.00' ),
+					el( 'h4', { className: 'zen-best-sellers__price' }, product.price || '0.00\u00a3' ),
 					product.quantity ? el( 'div', { className: 'zen-best-sellers__quantity' }, product.quantity ) : null
 				),
 				el(
