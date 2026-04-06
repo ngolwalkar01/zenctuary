@@ -9,9 +9,11 @@
 	const useBlockProps = blockEditor.useBlockProps;
 	const InspectorControls = blockEditor.InspectorControls;
 	const PanelBody = components.PanelBody;
+	const Button = components.Button;
 	const SelectControl = components.SelectControl;
 	const ToggleControl = components.ToggleControl;
 	const BaseControl = components.BaseControl;
+	const TextControl = components.TextControl;
 	const UnitControl = components.__experimentalUnitControl || components.UnitControl || components.TextControl;
 	const Spinner = components.Spinner;
 	const Notice = components.Notice;
@@ -180,6 +182,28 @@
 		return decodeEntities( product.name || '' );
 	}
 
+	function mergeProductEdits( existingProducts, nextProducts ) {
+		const existingById = new Map(
+			( Array.isArray( existingProducts ) ? existingProducts : [] )
+				.filter( Boolean )
+				.map( function ( product ) {
+					return [ product.id, product ];
+				} )
+		);
+
+		return ( Array.isArray( nextProducts ) ? nextProducts : [] ).map( function ( product ) {
+			const existingProduct = existingById.get( product.id );
+
+			if ( ! existingProduct ) {
+				return product;
+			}
+
+			return Object.assign( {}, product, {
+				ingredients: Array.isArray( existingProduct.ingredients ) ? existingProduct.ingredients.slice() : product.ingredients
+			} );
+		} );
+	}
+
 	function ProductCard( props ) {
 		const product = props.product;
 
@@ -315,7 +339,7 @@
 					return;
 				}
 
-				const normalizedProducts = products.filter( Boolean );
+				const normalizedProducts = mergeProductEdits( selectedProducts, products.filter( Boolean ) );
 				const currentSignature = JSON.stringify( selectedProducts );
 				const nextSignature = JSON.stringify( normalizedProducts );
 
@@ -358,6 +382,24 @@
 			setAttributes( { selectedProductIds: cleanedIds } );
 		}
 
+		function updateProductIngredients( productId, updater ) {
+			const nextProducts = selectedProducts.map( function ( product ) {
+				if ( ! product || product.id !== productId ) {
+					return product;
+				}
+
+				const currentIngredients = Array.isArray( product.ingredients ) ? product.ingredients.slice() : [];
+				const nextIngredients = updater( currentIngredients )
+					.map( function (ingredient) { return String( ingredient || '' ); } );
+
+				return Object.assign( {}, product, {
+					ingredients: nextIngredients
+				} );
+			} );
+
+			setAttributes( { selectedProducts: nextProducts } );
+		}
+
 		const productOptions = useMemo( function () {
 			return [ { label: __( 'Select a product', 'zenctuary' ), value: 0 } ].concat(
 				availableProducts.map( function ( product ) {
@@ -390,7 +432,61 @@
 					el( SelectControl, { label: __( 'Product 1', 'zenctuary' ), value: selectedIds[ 0 ] || 0, options: productOptions, onChange: function ( value ) { updateSelectedId( 0, value ); } } ),
 					el( SelectControl, { label: __( 'Product 2', 'zenctuary' ), value: selectedIds[ 1 ] || 0, options: productOptions, onChange: function ( value ) { updateSelectedId( 1, value ); } } ),
 					el( SelectControl, { label: __( 'Product 3', 'zenctuary' ), value: selectedIds[ 2 ] || 0, options: productOptions, onChange: function ( value ) { updateSelectedId( 2, value ); } } )
-				)
+				),
+				selectedProducts.length
+					? el(
+							PanelBody,
+							{ title: __( 'Ingredients', 'zenctuary' ), initialOpen: false },
+							selectedProducts.map( function ( product, productIndex ) {
+								const productIngredients = Array.isArray( product.ingredients ) && product.ingredients.length
+									? product.ingredients
+									: [ '' ];
+
+								return el(
+									BaseControl,
+									{ key: product.id || productIndex, label: ( product.name || __( 'Selected Product', 'zenctuary' ) ) + ' ' + __( 'Ingredients', 'zenctuary' ) },
+									productIngredients.map( function ( ingredient, ingredientIndex ) {
+										return el(
+											'div',
+											{
+												key: String( product.id ) + '-' + ingredientIndex,
+												style: { display: 'flex', alignItems: 'flex-end', gap: '8px', marginBottom: '8px' }
+											},
+											el( TextControl, {
+												label: __( 'Ingredient', 'zenctuary' ) + ' ' + ( ingredientIndex + 1 ),
+												value: ingredient,
+												onChange: function ( value ) {
+													updateProductIngredients( product.id, function ( currentIngredients ) {
+														const nextIngredients = currentIngredients.length ? currentIngredients.slice() : [ '' ];
+														nextIngredients[ ingredientIndex ] = value;
+														return nextIngredients;
+													} );
+												}
+											} ),
+											el( Button, {
+												variant: 'secondary',
+												onClick: function () {
+													updateProductIngredients( product.id, function ( currentIngredients ) {
+														const nextIngredients = currentIngredients.slice();
+														nextIngredients.splice( ingredientIndex, 1 );
+														return nextIngredients;
+													} );
+												}
+											}, __( 'Remove', 'zenctuary' ) )
+										);
+									} ),
+									el( Button, {
+										variant: 'primary',
+										onClick: function () {
+											updateProductIngredients( product.id, function ( currentIngredients ) {
+												return currentIngredients.concat( [ '' ] );
+											} );
+										}
+									}, __( 'Add Ingredient', 'zenctuary' ) )
+								);
+							} )
+					  )
+					: null
 			),
 			el(
 				'section',
