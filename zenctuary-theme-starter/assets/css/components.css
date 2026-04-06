@@ -703,7 +703,7 @@ input[type="checkbox"] {
 }
 
 .wp-block-column.is-vertically-aligned-center.zen-about-section.is-layout-flow.wp-block-column-is-layout-flow {
-  padding: var(--zen-space-50) !important;
+  padding: var(--zen-space-100) !important;
   max-width: 712.5px;
 }
 
