@@ -26,7 +26,7 @@
 
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__track {
   display: flex;
-  gap: 48px;
+  gap: 72px;
   align-items: stretch;
   justify-content: center;
 }
@@ -257,7 +257,7 @@
 
 @media (max-width: 1023px) {
   .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__track {
-    gap: 36px 24px;
+    gap: 48px 32px;
     flex-wrap: wrap;
   }
 
