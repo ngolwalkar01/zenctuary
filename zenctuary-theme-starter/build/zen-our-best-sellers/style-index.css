@@ -26,7 +26,7 @@
 
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__track {
   display: flex;
-  gap: 72px;
+  gap: 50px;
   align-items: stretch;
   justify-content: center;
   width: 100%;
@@ -55,7 +55,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 34px;
+  gap: 24px;
   width: 100%;
   min-height: 100%;
   padding: 0;
@@ -94,13 +94,13 @@
 
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__middle {
   display: grid;
-  grid-template-columns: 224px 1px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: 200px 1px minmax(0, 1fr);
+  gap: 10px;
   align-items: center;
 }
 
 .wp-block-zenctuary-zen-our-best-sellers .zen-best-sellers__image-wrap {
-  width: 224px;
+  width: 200px;
   height: 224px;
   display: flex;
   align-items: center;
