@@ -702,9 +702,14 @@ input[type="checkbox"] {
   flex-shrink: 0;
 }
 
-.zen-about-image-block {
-  width: var(--zen-image-block-width);
+.wp-block-column.is-vertically-aligned-center.zen-about-section.is-layout-flow.wp-block-column-is-layout-flow {
+  padding: var(--zen-space-50) !important;
+  max-width: 712.5px;
 }
+
+/* .zen-about-image-block {
+  width: var(--zen-image-block-width);
+} */
 
 .zen-contact-logo {
   display: flex;
