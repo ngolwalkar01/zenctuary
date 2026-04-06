@@ -186,7 +186,17 @@
 		return el(
 			'article',
 			{ className: 'zen-best-sellers__card' },
-			el( 'div', { className: 'zen-best-sellers__top' }, el( 'h2', { className: 'zen-best-sellers__title' }, product.name || __( 'Untitled product', 'zenctuary' ) ) ),
+			el(
+				'div',
+				{ className: 'zen-best-sellers__top' },
+				el(
+					'h2',
+					{ className: 'zen-best-sellers__title' },
+					product.permalink
+						? el( 'a', { className: 'zen-best-sellers__title-link', href: product.permalink }, product.name || __( 'Untitled product', 'zenctuary' ) )
+						: product.name || __( 'Untitled product', 'zenctuary' )
+				)
+			),
 			el(
 				'div',
 				{ className: 'zen-best-sellers__middle' },
@@ -199,7 +209,7 @@
 				el(
 					'div',
 					{ className: 'zen-best-sellers__ingredients' },
-					el( 'p', { className: 'zen-best-sellers__ingredients-label' }, __( 'Zutaten', 'zenctuary' ) ),
+					el( 'p', { className: 'zen-best-sellers__ingredients-label' }, __( 'Zutaten:', 'zenctuary' ) ),
 					product.ingredients && product.ingredients.length
 						? el(
 								'ul',
