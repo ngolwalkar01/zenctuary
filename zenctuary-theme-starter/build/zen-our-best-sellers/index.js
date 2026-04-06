@@ -459,7 +459,7 @@
 
 	registerBlockType( 'zenctuary/zen-our-best-sellers', {
 		apiVersion: 3,
-		title: 'Our Best Sellers',
+		title: 'Zen Our Best Sellers',
 		category: 'widgets',
 		icon: 'products',
 		attributes: {
