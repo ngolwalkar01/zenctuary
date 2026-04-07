@@ -643,6 +643,228 @@ input[type="checkbox"] {
 }
 
 /* ==========================================
+   EXPERIENCE SPACE BLOCK
+   ========================================== */
+
+.zen-experience-space-block {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* Space section */
+.zen-space-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Space header: icon + title inline */
+.zen-space-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.zen-space-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.zen-space-title {
+  font-family: var(--zen-font-heading);
+  font-size: var(--zen-fs-h2);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--primary-gold);
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.zen-space-description {
+  font-size: var(--zen-fs-body-lg);
+  color: var(--wp--preset--color--primary-beige);
+  line-height: var(--zen-lh-body);
+  margin: 0;
+  max-width: 900px;
+}
+
+/* Accordion wrapper */
+.zen-accordion-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zen-accordion-item {
+  border: 1px solid rgba(246, 242, 234, 0.15);
+  border-radius: var(--zen-radius-card);
+  overflow: hidden;
+}
+
+.zen-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--wp--preset--color--primary-beige);
+  font-family: var(--zen-font-heading);
+  font-size: var(--zen-fs-h4);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: left;
+}
+
+.zen-accordion-header:hover {
+  color: var(--wp--preset--color--primary-gold);
+}
+
+.zen-accordion-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Toggle show/hide of icon halves */
+.zen-accordion-item--open .zen-accordion-icon--minus { display: inline; }
+.zen-accordion-item--open .zen-accordion-icon--plus  { display: none; }
+.zen-accordion-icon--minus { display: none; }
+.zen-accordion-icon--plus  { display: inline; }
+
+.zen-accordion-panel {
+  padding: 0 24px 32px;
+}
+
+/* 3-column card grid */
+.zen-class-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual card */
+.zen-class-card {
+  background: var(--wp--preset--color--primary-beige);
+  border-radius: var(--zen-radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--wp--preset--color--primary-grey);
+}
+
+/* Image section */
+.zen-class-card__image-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.zen-class-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.zen-class-card__image--placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--wp--preset--color--secondary-grey-dark);
+}
+
+/* Zencoins overlay */
+.zen-class-card__zencoins {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zen-zencoins-label {
+  font-family: var(--zen-font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--primary-gold);
+  letter-spacing: 0.05em;
+}
+
+.zen-zencoins-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--wp--preset--color--primary-gold);
+  color: var(--wp--preset--color--primary-grey);
+  font-family: var(--zen-font-heading);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Card body */
+.zen-class-card__body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.zen-class-card__title {
+  font-family: var(--zen-font-heading);
+  font-size: var(--zen-fs-h4);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--wp--preset--color--primary-grey);
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Difficulty row */
+.zen-class-card__difficulty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--zen-fs-body);
+  font-weight: 600;
+  color: var(--wp--preset--color--primary-grey);
+}
+
+.zen-difficulty-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--wp--preset--color--primary-grey);
+}
+
+.zen-class-card__desc {
+  font-size: var(--zen-fs-body-sm);
+  line-height: var(--zen-lh-body);
+  color: var(--wp--preset--color--secondary-grey-dark);
+  margin: 0;
+  flex: 1;
+}
+
+.zen-class-card__btn {
+  margin-top: auto;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* ==========================================
    CONTACT MAP SECTION
    ========================================== */
 

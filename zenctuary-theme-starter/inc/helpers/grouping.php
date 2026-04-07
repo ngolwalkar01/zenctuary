@@ -205,3 +205,98 @@ function get_experience_meta( int $product_id ): array {
         'sort_order'        => (int) get_post_meta( $product_id, '_zen_sort_order', true ),
     ];
 }
+
+/**
+ * Generic: group a flat array of products by any given taxonomy.
+ *
+ * This is the flexible version used by the experience-space block so
+ * the admin can choose any taxonomy for primary or sub grouping.
+ *
+ * Uses a single bulk wp_get_object_terms() call — no N+1.
+ *
+ * @param WP_Post[] $products  Flat array of WP_Post objects.
+ * @param string    $taxonomy  Taxonomy slug to group by.
+ * @return array {
+ *     Keyed by term slug:
+ *     @type WP_Term   $term      The term object.
+ *     @type int       $order     The term's sort order (from _zen_sort_order term meta, if set).
+ *     @type WP_Post[] $products  Products assigned to this term.
+ * }
+ */
+function group_products_by_taxonomy( array $products, string $taxonomy ): array {
+
+    if ( empty( $products ) || empty( $taxonomy ) ) {
+        return [];
+    }
+
+    $post_ids = wp_list_pluck( $products, 'ID' );
+
+    $all_terms = wp_get_object_terms( $post_ids, $taxonomy, [
+        'orderby' => 'name',
+        'order'   => 'ASC',
+    ] );
+
+    if ( is_wp_error( $all_terms ) || empty( $all_terms ) ) {
+        return [];
+    }
+
+    // Map: post_id => [ slug, ... ]
+    $post_term_map = [];
+    foreach ( $all_terms as $term ) {
+        if ( isset( $term->object_id ) ) {
+            $post_term_map[ $term->object_id ][] = $term->slug;
+        }
+    }
+
+    // Unique term index keyed by slug.
+    $terms_index = [];
+    foreach ( $all_terms as $term ) {
+        $terms_index[ $term->slug ] = $term;
+    }
+
+    // Initialise grouped structure.
+    $grouped = [];
+    foreach ( $terms_index as $slug => $term ) {
+        $grouped[ $slug ] = [
+            'term'     => $term,
+            'products' => [],
+        ];
+    }
+
+    // Populate products into their term buckets.
+    foreach ( $products as $product ) {
+        $slugs = $post_term_map[ $product->ID ] ?? [];
+        foreach ( $slugs as $slug ) {
+            if ( isset( $grouped[ $slug ] ) ) {
+                $grouped[ $slug ]['products'][] = $product;
+            }
+        }
+    }
+
+    return $grouped;
+}
+
+/**
+ * Two-level flexible grouping: primary taxonomy → sub taxonomy → products.
+ *
+ * @param WP_Post[] $products          Flat product array.
+ * @param string    $primary_taxonomy  Outer group (e.g., 'space_type').
+ * @param string    $sub_taxonomy      Inner accordion (e.g., 'activity_type').
+ * @return array  primary_slug → { term, groups: sub_slug → { term, products } }
+ */
+function group_products_nested( array $products, string $primary_taxonomy, string $sub_taxonomy ): array {
+
+    if ( empty( $products ) ) {
+        return [];
+    }
+
+    $by_primary = group_products_by_taxonomy( $products, $primary_taxonomy );
+
+    foreach ( $by_primary as $slug => &$group ) {
+        $group['groups'] = group_products_by_taxonomy( $group['products'], $sub_taxonomy );
+    }
+    unset( $group );
+
+    return $by_primary;
+}
+
