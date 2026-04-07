@@ -25,13 +25,14 @@
 	font-weight: 700;
 	line-height: 1.1;
 	letter-spacing: -0.02em;
-	text-align: left;
+	text-align: center;
 	text-transform: none;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__filters {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 12px;
 	margin: 0 0 42px;
 }
@@ -64,6 +65,7 @@
 	padding: 0 0 42px;
 	margin: 0 0 42px;
 	border-bottom: 1px solid var(--zen-soul-menu-border);
+	text-align: center;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__category:last-child {
@@ -73,7 +75,8 @@
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__category-header {
 	display: flex;
 	align-items: baseline;
-	justify-content: space-between;
+	justify-content: center;
+	flex-wrap: wrap;
 	gap: 24px;
 	margin: 0 0 14px;
 }
@@ -95,13 +98,13 @@
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 1.35;
-	text-align: right;
+	text-align: center;
 	white-space: nowrap;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__category-description {
 	max-width: 980px;
-	margin: 0 0 28px;
+	margin: 0 auto 28px;
 	color: #fff;
 	font-size: 16px;
 	line-height: 1.65;
@@ -120,6 +123,7 @@
 	flex-direction: column;
 	gap: 10px;
 	padding: 0;
+	text-align: center;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-title {
@@ -224,7 +228,7 @@
 	}
 
 	.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__category-header {
-		align-items: flex-start;
+		align-items: center;
 		gap: 14px;
 	}
 
