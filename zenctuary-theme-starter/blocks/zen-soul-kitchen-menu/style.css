@@ -102,7 +102,7 @@
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__category-description {
 	max-width: 980px;
 	margin: 0 0 28px;
-	color: var(--zen-soul-menu-muted);
+	color: #fff;
 	font-size: 16px;
 	line-height: 1.65;
 }
@@ -131,23 +131,32 @@
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-description,
-.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-short-description,
-.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-details {
+.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-short-description {
 	margin: 0;
-	color: var(--zen-soul-menu-muted);
-	font-size: 15px;
-	line-height: 1.55;
 	overflow-wrap: anywhere;
 	white-space: pre-line;
 }
 
+.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-description {
+	color: #fff;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-short-description {
 	margin-top: 2px;
+	color: var(--zen-soul-menu-muted);
+	font-size: 14px;
+	line-height: 1.55;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-details {
+	margin: 0;
 	color: rgba(246, 242, 234, 0.58);
+	font-size: 15px;
 	font-style: italic;
+	line-height: 1.55;
+	overflow-wrap: anywhere;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-meta {
