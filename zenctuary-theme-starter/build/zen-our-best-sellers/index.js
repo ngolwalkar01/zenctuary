@@ -321,6 +321,8 @@
 		}, [] );
 
 		useEffect( function () {
+			setCurrentIndex( 0 );
+
 			if ( ! selectedIds.length ) {
 				if ( selectedProducts.length ) {
 					setAttributes( { selectedProducts: [] } );
