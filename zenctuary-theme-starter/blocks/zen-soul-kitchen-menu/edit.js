@@ -27,6 +27,12 @@ const stripHtml = ( value = '' ) => {
 	return element.textContent || element.innerText || '';
 };
 
+const formatPlainText = ( value = '' ) => stripHtml(
+	String( value )
+		.replace( /<\s*br\s*\/?>/gi, '\n' )
+		.replace( /<\/(p|div|li|h[1-6])>/gi, '\n' )
+).replace( /\n{3,}/g, '\n\n' ).trim();
+
 const decodeEntities = ( value = '' ) => {
 	const textarea = document.createElement( 'textarea' );
 	textarea.innerHTML = value;
@@ -116,13 +122,14 @@ function ProductCard( { product } ) {
 	const attribute = getAttributeText( product );
 	const price = getProductPrice( product );
 	const details = getDetailsText( product );
+	const description = formatPlainText( product.description || '' );
+	const shortDescription = formatPlainText( product.short_description || '' );
 
 	return (
 		<article className="zen-soul-menu__product">
 			<h4 className="zen-soul-menu__product-title">{ decodeEntities( product.name || __( 'Untitled product', 'zenctuary' ) ) }</h4>
-			{ ( product.short_description || product.description ) && (
-				<p className="zen-soul-menu__product-description">{ stripHtml( product.short_description || product.description ) }</p>
-			) }
+			{ description && <p className="zen-soul-menu__product-description">{ description }</p> }
+			{ shortDescription && <p className="zen-soul-menu__product-short-description">{ shortDescription }</p> }
 			{ details && <p className="zen-soul-menu__product-details">{ details }</p> }
 			{ ( attribute || price ) && (
 				<p className="zen-soul-menu__product-meta">{ [ attribute, price ].filter( Boolean ).join( ' / ' ) }</p>

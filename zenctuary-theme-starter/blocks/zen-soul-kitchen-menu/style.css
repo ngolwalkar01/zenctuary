@@ -131,12 +131,18 @@
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-description,
+.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-short-description,
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-details {
 	margin: 0;
 	color: var(--zen-soul-menu-muted);
 	font-size: 15px;
 	line-height: 1.55;
 	overflow-wrap: anywhere;
+	white-space: pre-line;
+}
+
+.wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-short-description {
+	margin-top: 2px;
 }
 
 .wp-block-zenctuary-zen-soul-kitchen-menu .zen-soul-menu__product-details {

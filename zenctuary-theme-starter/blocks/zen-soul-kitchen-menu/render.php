@@ -105,6 +105,22 @@ if ( ! function_exists( 'zenctuary_soul_menu_get_product_details' ) ) {
 	}
 }
 
+if ( ! function_exists( 'zenctuary_soul_menu_format_plain_text' ) ) {
+	function zenctuary_soul_menu_format_plain_text( string $content ): string {
+		if ( '' === trim( $content ) ) {
+			return '';
+		}
+
+		$content = preg_replace( '/<\s*br\s*\/?>/i', "\n", $content );
+		$content = preg_replace( '/<\/(p|div|li|h[1-6])>/i', "\n", $content );
+		$content = wp_strip_all_tags( $content );
+		$content = wp_specialchars_decode( $content, ENT_QUOTES );
+		$content = preg_replace( "/\n{3,}/", "\n\n", $content );
+
+		return trim( $content );
+	}
+}
+
 if ( ! function_exists( 'zenctuary_soul_menu_get_groups' ) ) {
 	function zenctuary_soul_menu_get_groups( string $tag_slug, array $category_settings ): array {
 		$products = wc_get_products(
@@ -210,15 +226,19 @@ $filters = array(
 					<div class="zen-soul-menu__products">
 						<?php foreach ( $group['products'] as $product ) : ?>
 							<?php
-							$attribute_text = zenctuary_soul_menu_get_product_attribute_text( $product );
-							$price_text     = wp_strip_all_tags( $product->get_price_html() );
-							$details_text   = zenctuary_soul_menu_get_product_details( $product );
-							$description    = $product->get_short_description() ? $product->get_short_description() : $product->get_description();
+							$attribute_text     = zenctuary_soul_menu_get_product_attribute_text( $product );
+							$price_text         = wp_strip_all_tags( $product->get_price_html() );
+							$details_text       = zenctuary_soul_menu_get_product_details( $product );
+							$description        = zenctuary_soul_menu_format_plain_text( $product->get_description() );
+							$short_description = zenctuary_soul_menu_format_plain_text( $product->get_short_description() );
 							?>
 							<article class="zen-soul-menu__product">
 								<h4 class="zen-soul-menu__product-title"><?php echo esc_html( $product->get_name() ); ?></h4>
 								<?php if ( $description ) : ?>
-									<p class="zen-soul-menu__product-description"><?php echo esc_html( wp_strip_all_tags( $description ) ); ?></p>
+									<p class="zen-soul-menu__product-description"><?php echo esc_html( $description ); ?></p>
+								<?php endif; ?>
+								<?php if ( $short_description ) : ?>
+									<p class="zen-soul-menu__product-short-description"><?php echo esc_html( $short_description ); ?></p>
 								<?php endif; ?>
 								<?php if ( $details_text ) : ?>
 									<p class="zen-soul-menu__product-details"><?php echo esc_html( $details_text ); ?></p>
