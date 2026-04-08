@@ -45,6 +45,10 @@
   --zen-btn-height-sm: 44px;
   --zen-input-height: 52px;
   --zen-header-height: 120px;
+  --zen-faq-height: 1211px;
+  --zen-space-50: 50px;
+  --zen-space-100: 100px;
+  --zen-image-block-width: 715px;
 
   /* Borders */
   --zen-border-width: 2px;

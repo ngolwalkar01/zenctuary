@@ -5,16 +5,16 @@
  * Categories: featured, text
  */
 ?>
-<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"secondary-grey-dark","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-secondary-grey-dark-background-color has-background" style="padding-top:var(--wp--preset--spacing--80);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--80);padding-left:var(--wp--preset--spacing--40)">
+<!-- wp:group {"align":"full","className":"zen-section","backgroundColor":"secondary-grey-dark","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull zen-section has-secondary-grey-dark-background-color has-background">
     
     <!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"64px","left":"64px"}}}} -->
     <div class="wp-block-columns alignwide">
         
         <!-- wp:column {"width":"50%"} -->
         <div class="wp-block-column" style="flex-basis:50%">
-            <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center","justifyContent":"left"}} -->
-            <div class="wp-block-group">
+            <!-- wp:group {"className":"zen-zencoin-title-group","layout":{"type":"flex","flexWrap":"nowrap","alignItems":"center","justifyContent":"left"}} -->
+            <div class="wp-block-group zen-zencoin-title-group">
                 <!-- wp:heading {"level":2,"style":{"typography":{"textTransform":"uppercase"},"color":{"text":"var(--wp--preset--color--primary-gold)"}}} -->
                 <h2 class="wp-block-heading has-text-color" style="color:var(--wp--preset--color--primary-gold);text-transform:uppercase">What are Zencoins?</h2>
                 <!-- /wp:heading -->
