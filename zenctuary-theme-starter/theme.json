@@ -7,6 +7,7 @@
       "contentSize": "1200px",
       "wideSize": "1440px"
     },
+    "useRootPaddingAwareAlignments": true,
     "color": {
       "defaultPalette": false,
       "defaultGradients": false,
@@ -78,7 +79,7 @@
         },
         {
           "slug": "body",
-          "size": "16px",
+          "size": "clamp(16px, 1.25vw + 11px, 18px)",
           "name": "Body"
         },
         {
@@ -242,6 +243,15 @@
       "fontSize": "var(--wp--preset--font-size--body)",
       "lineHeight": "1.4"
     },
+    "spacing": {
+      "padding": {
+        "top": "0",
+        "right": "clamp(32px, 8.3vw, 120px)",
+        "bottom": "0",
+        "left": "clamp(32px, 8.3vw, 120px)"
+      },
+      "blockGap": "0"
+    },
     "elements": {
       "heading": {
         "color": {
@@ -328,17 +338,23 @@
   "customTemplates": [
     {
       "name": "page-no-title",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - No Title"
     },
     {
       "name": "page-fullwidth",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - Fullwidth"
     },
     {
       "name": "page-hero",
-      "postTypes": ["page"],
+      "postTypes": [
+        "page"
+      ],
       "title": "Page - Hero Builder (Behind Header)"
     }
   ]

@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+
+# IDE / editor folders
+.idea/
+.vscode/
+*.code-workspace
+
+# NOTE: /build is intentionally NOT ignored.
+# All developers must run `npm run build` before committing
+# any changes to the /blocks source directory.
+#
+# Rule: never commit /build without also committing the matching /blocks source.
