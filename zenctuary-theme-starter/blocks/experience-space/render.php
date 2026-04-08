@@ -79,6 +79,7 @@ if ( empty( $grouped ) ) {
         <?php endif; ?>
 
         <!-- Accordion Groups -->
+        <?php if ( ! empty( $sub_groups ) ) : ?>
         <div class="zen-accordion-wrapper">
             <?php foreach ( $sub_groups as $activity_slug => $activity_group ) :
                 $activity_term     = $activity_group['term'];
@@ -100,58 +101,12 @@ if ( empty( $grouped ) ) {
                 <div class="zen-accordion-panel" <?php echo ! $is_first ? 'hidden' : ''; ?>>
                     <div class="zen-class-cards-grid">
                         <?php foreach ( $activity_products as $product ) :
-                            $meta        = get_experience_meta( $product->ID );
-                            $link        = get_permalink( $product->ID );
-                            $title       = get_the_title( $product );
-                            $thumb_url   = get_the_post_thumbnail_url( $product->ID, 'large' );
+                            $meta      = get_experience_meta( $product->ID );
+                            $link      = get_permalink( $product->ID );
+                            $title     = get_the_title( $product );
+                            $thumb_url = get_the_post_thumbnail_url( $product->ID, 'large' );
                         ?>
-
-                        <article class="zen-class-card">
-
-                            <!-- Image + Zencoins overlay -->
-                            <div class="zen-class-card__image-wrap">
-                                <?php if ( $thumb_url ) : ?>
-                                    <img class="zen-class-card__image"
-                                         src="<?php echo esc_url( $thumb_url ); ?>"
-                                         alt="<?php echo esc_attr( $title ); ?>" />
-                                <?php else : ?>
-                                    <div class="zen-class-card__image zen-class-card__image--placeholder"></div>
-                                <?php endif; ?>
-
-                                <?php if ( $show_zencoins && $meta['zen_coins'] ) : ?>
-                                <div class="zen-class-card__zencoins">
-                                    <span class="zen-zencoins-label"><?php esc_html_e( 'Zencoins:', 'zenctuary' ); ?></span>
-                                    <span class="zen-zencoins-badge"><?php echo (int) $meta['zen_coins']; ?></span>
-                                </div>
-                                <?php endif; ?>
-                            </div>
-
-                            <!-- Card Body -->
-                            <div class="zen-class-card__body">
-                                <h3 class="zen-class-card__title"><?php echo esc_html( strtoupper( $title ) ); ?></h3>
-
-                                <?php if ( $show_difficulty && ! empty( $meta['difficulty_level'] ) ) : ?>
-                                <div class="zen-class-card__difficulty">
-                                    <svg class="zen-difficulty-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM9.29 16.29L5.7 12.7C5.31 12.31 5.31 11.68 5.7 11.29C6.09 10.9 6.72 10.9 7.11 11.29L10 14.17L16.88 7.29C17.27 6.9 17.9 6.9 18.29 7.29C18.68 7.68 18.68 8.31 18.29 8.7L10.7 16.29C10.32 16.68 9.68 16.68 9.29 16.29Z" fill="currentColor"/>
-                                    </svg>
-                                    <span><?php echo esc_html( $meta['difficulty_level'] ); ?></span>
-                                </div>
-                                <?php endif; ?>
-
-                                <?php if ( ! empty( $meta['short_description'] ) ) : ?>
-                                <p class="zen-class-card__desc"><?php echo esc_html( $meta['short_description'] ); ?></p>
-                                <?php endif; ?>
-
-                                <?php if ( $show_book_btn ) : ?>
-                                <a href="<?php echo esc_url( $link ); ?>" class="zen-btn zen-btn--primary zen-class-card__btn">
-                                    <?php echo $book_btn_label; ?>
-                                </a>
-                                <?php endif; ?>
-                            </div>
-
-                        </article>
-
+                            <?php include __DIR__ . '/card.php'; ?>
                         <?php endforeach; ?>
                     </div>
                 </div>
@@ -161,7 +116,23 @@ if ( empty( $grouped ) ) {
             <?php endforeach; ?>
         </div><!-- /.zen-accordion-wrapper -->
 
+        <?php else : ?>
+        <!-- Fallback: no accordion sub-grouping — render cards directly -->
+        <!-- This happens when products have no activity_type term assigned -->
+        <div class="zen-class-cards-grid">
+            <?php foreach ( $primary_group['products'] as $product ) :
+                $meta      = get_experience_meta( $product->ID );
+                $link      = get_permalink( $product->ID );
+                $title     = get_the_title( $product );
+                $thumb_url = get_the_post_thumbnail_url( $product->ID, 'large' );
+            ?>
+                <?php include __DIR__ . '/card.php'; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
     </section>
+
 
     <?php endforeach; ?>
 
