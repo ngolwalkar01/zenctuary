@@ -20,27 +20,16 @@ $show_difficulty    = (bool) ( $attributes['showDifficulty']  ?? true );
 $show_book_btn      = (bool) ( $attributes['showBookButton']  ?? true );
 $book_btn_label     = esc_html( $attributes['bookButtonLabel'] ?? 'Book now →' );
 
-// Build dynamic filter arg for the query helper.
-$query_args = [];
-if ( $filter_term_slug && $filter_taxonomy ) {
-    $query_args[ $filter_taxonomy ] = $filter_term_slug;
-}
-$query_args['posts_per_page'] = -1;
-$query_args['meta_key']       = '_zen_sort_order';
-$query_args['orderby']        = 'meta_value_num';
-$query_args['order']          = 'ASC';
-
-// Because get_experience_products() accepts named taxonomy args, we need to pass them correctly.
-// Re-key to match the helper's expected parameter names.
+// Build query args — only add taxonomy filter if a term is selected.
 $helper_args = [];
-if ( $filter_term_slug ) {
+if ( $filter_term_slug && $filter_taxonomy ) {
     $helper_args[ $filter_taxonomy ] = $filter_term_slug;
 }
 
 $query = get_experience_products( $helper_args );
 
 if ( empty( $query->posts ) ) {
-    echo '<p class="zen-no-results">' . esc_html__( 'No experiences found.', 'zenctuary' ) . '</p>';
+    echo '<p class="zen-no-results">' . esc_html__( 'No experiences found. Assign products to the correct taxonomy terms.', 'zenctuary' ) . '</p>';
     return;
 }
 
@@ -48,9 +37,10 @@ if ( empty( $query->posts ) ) {
 $grouped = group_products_nested( $query->posts, $primary_taxonomy, $accordion_taxonomy );
 
 if ( empty( $grouped ) ) {
-    echo '<p class="zen-no-results">' . esc_html__( 'No grouping data available.', 'zenctuary' ) . '</p>';
+    echo '<p class="zen-no-results">' . esc_html__( 'Products were found but none are assigned to any "' . esc_html( $primary_taxonomy ) . '" term.', 'zenctuary' ) . '</p>';
     return;
 }
+
 
 ?>
 <div class="zen-experience-space-block">

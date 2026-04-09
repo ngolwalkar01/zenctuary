@@ -231,9 +231,13 @@ function group_products_by_taxonomy( array $products, string $taxonomy ): array 
 
     $post_ids = wp_list_pluck( $products, 'ID' );
 
+    // 'all_with_object_id' ensures object_id is always set on each returned term.
+    // Without this, WordPress may return cached term objects that lack object_id,
+    // which breaks the post→term mapping and causes products to silently disappear.
     $all_terms = wp_get_object_terms( $post_ids, $taxonomy, [
         'orderby' => 'name',
         'order'   => 'ASC',
+        'fields'  => 'all_with_object_id',
     ] );
 
     if ( is_wp_error( $all_terms ) || empty( $all_terms ) ) {
@@ -275,6 +279,7 @@ function group_products_by_taxonomy( array $products, string $taxonomy ): array 
 
     return $grouped;
 }
+
 
 /**
  * Two-level flexible grouping: primary taxonomy → sub taxonomy → products.

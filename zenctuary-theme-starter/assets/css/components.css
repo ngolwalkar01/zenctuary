@@ -550,6 +550,145 @@ input[type="checkbox"] {
    ZENCOINS PRICING & VISUALS
    ========================================== */
 
+.zen-hero-bottom {
+  position: absolute;
+  bottom: -290px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.zen-coins-section {
+  gap: 64px 150px;
+}
+
+.zen-coins-section h2 {
+  font-weight: 700;
+}
+
+.zen-coins-section .zen-zencoin-title-group {
+  gap: 0;
+}
+
+.zen-coins-section .zen-pricing-box {
+  border-radius: 24px;
+background-color:var(--wp--preset--color--primary-grey,#3f3e3e);
+}
+
+.zen-coins-section .zen-price-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.zen-coins-section .zen-price-top p {
+  margin: 0;
+  color: var(--wp--preset--color--primary-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.zen-coins-section .wp-block-separator {
+  margin: 26px 0;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  opacity: 1;
+}
+
+.zen-coins-section .zen-price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 32px;
+    row-gap: 20px;
+    align-content: space-around;
+}
+
+.zen-coins-section .zen-price-title {
+  flex: 1 1 auto;
+  margin: 0;
+  color: var(--wp--preset--color--primary-beige);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+	font-size:18px;
+}
+
+.zen-coins-section .zen-price-row-right {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.zen-coins-section .zen-price-label {
+  margin: 0;
+  color: var(--wp--preset--color--primary-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.zen-coins-section .zen-price-desc {
+  flex: 0 0 100%;
+  margin: 0;
+  color: var(--wp--preset--color--secondary-grey-light);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.zen-coins-section .zen-coins-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.zen-coins-section .zen-coins-group .zen-coin-icon + .zen-coin-icon {
+  margin-left: -8px;
+}
+
+.zen-coins-section .zen-coin-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 39px;
+  height: 39px;
+  min-width: 39px;
+  border-radius: 50%;
+  background-color: var(--wp--preset--color--primary-gold);
+  color: var(--wp--preset--color--primary-grey);
+  font-family: var(--wp--preset--font-family--dm-sans);
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid var(--wp--preset--color--primary-grey);
+  box-shadow:
+    inset 0 0 0 3px var(--wp--preset--color--primary-gold),
+    inset 0 0 0 4px var(--wp--preset--color--primary-grey);
+}
+
+.zen-coins-section .zen-coin-icon--large {
+  width: 39px;
+  height: 39px;
+}
+
+@media (max-width: 991px) {
+  .zen-coins-section {
+    gap: 40px;
+  }
+
+  .zen-coins-section .zen-price-row {
+    row-gap: 14px;
+  }
+
+  .zen-coins-section .zen-price-row-right {
+    flex: 0 0 100%;
+    justify-content: flex-start;
+  }
+}
+
 /* Zencoin Styling */
 .zen-coin-icon {
   display: inline-flex;
@@ -650,6 +789,10 @@ input[type="checkbox"] {
   display: flex;
   flex-direction: column;
   gap: 80px;
+	padding-top: var(--zen-space-180);
+	padding-bottom: var(--zen-space-180);
+	padding-left: var(--zen-space-120);
+	padding-right: var(--zen-space-120);
 }
 
 /* Space section */
